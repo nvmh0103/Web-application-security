@@ -1,0 +1,32 @@
+{
+  "name": "Web-application-security",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js",
+    "migrate": "npx prisma migrate dev --name airbnb"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nvmh0103/Web-application-security.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nvmh0103/Web-application-security/issues"
+  },
+  "homepage": "https://github.com/nvmh0103/Web-application-security#readme",
+  "dependencies": {
+    "@prisma/client": "^3.11.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15",
+    "winston": "^3.6.0"
+  },
+  "devDependencies": {
+    "prisma": "^3.11.1"
+  }
+}

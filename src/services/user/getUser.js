@@ -1,11 +1,18 @@
 const request = require('../../utils/requests');
+const {PrismaClient} = require('@prisma/client');
 
-const getUser = (req, res) => {
+const prisma = new PrismaClient();
+
+const getUser = async (req, res) => {
     try {
-        console.log(req.user);
-        return request.okRequest(res, "Success", {user: req.user});
+        const user = await prisma.user.findUnique({
+            where:{
+                email: req.email
+            }
+        })
+        return request.okRequest(res, "Success", user);
     } catch (err){
-        return request.InteralServerError(res, err);
+        console.log("Something wrong!");
     }
 }
 module.exports = getUser;

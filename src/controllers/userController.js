@@ -1,8 +1,8 @@
-const services = require('../services');
+const {user} = require('../services');
 
 class userController {
     getUser(req, res){
-        services.user.getUser(req, res);
+        user.getUser(req, res);
     }
 }
 

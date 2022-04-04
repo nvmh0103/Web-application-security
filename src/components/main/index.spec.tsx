@@ -11,11 +11,12 @@ describe("Main component testing with enzyme", () => {
     });
 
     it("renders texts successfuly", () => {
-        expect(component.html()).toContain("The frontend boilerplate with superpowers!");
+        expect(component.html()).toContain(
+            "The frontend boilerplate with superpowers!",
+        );
     });
 
     it("renders button successfuly", () => {
         expect(component.find(Button)).toBeDefined();
     });
 });
-

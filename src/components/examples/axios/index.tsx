@@ -58,9 +58,7 @@ export const AxiosExample = () => {
             <header>
                 <h2>Fetch Data Fetching Example</h2>
             </header>
-            <main
-                data-testid="joke-container"
-            >
+            <main data-testid="joke-container">
                 <p>Programmer Jokes {`#${data[0].id}`}</p>
                 <p>{data[0].setup}</p>
                 <p>{data[0].punchline}</p>

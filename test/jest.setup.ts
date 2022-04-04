@@ -11,13 +11,13 @@ dotenv.config({ path: ".env.test" });
 axios.defaults.adapter = httpAdapter;
 
 Enzyme.configure({ adapter: new Adapter() });
-    
+
 afterAll(() => {
     nock.cleanAll();
     nock.restore();
 });
 
-window.matchMedia = jest.fn().mockImplementation(query => {
+window.matchMedia = jest.fn().mockImplementation((query) => {
     return {
         matches: false,
         media: query,
@@ -25,7 +25,7 @@ window.matchMedia = jest.fn().mockImplementation(query => {
         addListener: jest.fn(),
         removeListener: jest.fn(),
     };
-  });
-  
-  window.scroll = jest.fn();
-  window.alert = jest.fn();
+});
+
+window.scroll = jest.fn();
+window.alert = jest.fn();

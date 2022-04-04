@@ -3,12 +3,12 @@ name: ci
 on:
   push:
     branches:
+      - fe-cc2
       - main
-      - master
   pull_request:
     branches:
+      - fe-cc2
       - main
-      - master
 
 jobs:
   ci:

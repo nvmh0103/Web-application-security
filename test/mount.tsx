@@ -2,10 +2,8 @@ import React, { ReactNode } from "react";
 import { mount as mountBase, MountRendererProps, ReactWrapper } from "enzyme";
 
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Provider } from 'react-redux'
-import store from '@redux/store'
-
-
+import { Provider } from "react-redux";
+import store from "@redux/store";
 
 /**
  * Custom renderer example with enzyme
@@ -16,19 +14,16 @@ import store from '@redux/store'
  */
 
 const AllTheProviders = ({ children }) => {
-    const queryClient = new QueryClient()
+    const queryClient = new QueryClient();
 
     return (
         <>
             <QueryClientProvider client={queryClient}>
-<Provider store={store}>
-                {children}
-            </Provider>
-</QueryClientProvider>
+                <Provider store={store}>{children}</Provider>
+            </QueryClientProvider>
         </>
     );
 };
-
 
 const mount: (node: ReactNode, options?: MountRendererProps) => ReactWrapper = (
     node,

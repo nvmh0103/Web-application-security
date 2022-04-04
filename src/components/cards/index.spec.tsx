@@ -11,6 +11,8 @@ describe("Cards component testing with enzyme", () => {
     });
 
     it("cards length must be equal to the length of the meta data ", () => {
-        expect(component.find(".col-span-1").length).toEqual(data.plugins.length);
+        expect(component.find(".col-span-1").length).toEqual(
+            data.plugins.length,
+        );
     });
 });

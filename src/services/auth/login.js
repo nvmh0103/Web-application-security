@@ -19,9 +19,13 @@ const login = async (req, res) => {
         if (!isMatch) {
             return request.badRequest(res, 'User or password is invalid!');
         }
-        console.log(user.email);
-        const token = await jwt.sign({email:user.email});
-        return request.createSuccessRequest(res, {token});
+        const token = jwt.signToken({email:user.email});
+        const refreshToken = jwt.signRefreshToken({email: user.email}); 
+        req.session = {
+            jwtToken: token,
+            jwtRefresh: refreshToken,
+        }
+        return request.createSuccessRequest(res, "Login successfully");
 
     } catch (err){
         return request.InteralServerError(res,err);

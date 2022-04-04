@@ -1,9 +1,11 @@
-const {PrismaClient} = require('@prisma/client');
-const request = require('../../utils/requests')
+const request = require('../../utils/requests');
 
-const prisma = new PrismaClient()
-
-const getUser = async (req, res) => {
-    return request.okRequest(res, "OK");
+const getUser = (req, res) => {
+    try {
+        console.log(req.user);
+        return request.okRequest(res, "Success", {user: req.user});
+    } catch (err){
+        return request.InteralServerError(res, err);
+    }
 }
 module.exports = getUser;

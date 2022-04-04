@@ -2,6 +2,7 @@ const {PrismaClient} = require('@prisma/client');
 const request = require('../../utils/requests');
 const brcypt = require('bcryptjs');
 
+
 const prisma = new PrismaClient()
 
 const createUser = async (req, res) => {
@@ -12,7 +13,7 @@ const createUser = async (req, res) => {
                 ...req.body
             }
         })
-        return request.createSuccessRequest(res,'User created successfully');
+        return request.createSuccessRequest(res,'User created successfully', {user});
     } catch (err){
         return request.InteralServerError(res,err);
     }

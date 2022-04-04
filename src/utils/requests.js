@@ -1,5 +1,8 @@
 class requests{  
-    okRequest(res, message){
+    okRequest(res, message, returnObj){
+        if (returnObj){
+            return res.status(200).send({message, data: returnObj});
+        }
         return res.status(200).send({message});
     }
     badRequest(res, err){
@@ -8,10 +11,13 @@ class requests{
     InteralServerError(res, err){
         return res.status(500).send({err});
     }
-    NotAuthorizedError(res, err){
+    NotAuthorizedError(res){
         return res.status(403).send({err: 'Not Authorized'});
     }
-    createSuccessRequest(res, message){
+    createSuccessRequest(res, message, returnObj){
+        if (returnObj){
+            return res.status(201).send({message, data: returnObj});
+        }
         return res.status(201).send({message});
     }
 

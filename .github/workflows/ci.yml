@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@fe-cc2
+        uses: actions/checkout@master
 
       - name: Setup node env
         uses: actions/setup-node@v2.1.2
@@ -36,15 +36,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install dependencies
-        run: npm ci
 
-      - name: Run lint
-        run: npm run lint
+          - name: Install dependencies
+            run: yarn
 
-      - name: Run tests
-        run: npm run test
+          - name: Run lint
+            run: yarn lint
 
-      - name: Run e2e test
-        run: npm run cypress:test
+          - name: Run tests
+            run: yarn test
+
+          - name: Run e2e test
+            run: yarn cypress:test
 

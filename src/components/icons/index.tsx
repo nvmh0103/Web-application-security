@@ -6,3 +6,8 @@ export { default as TwitterIcon } from "./TwitterIcon";
 export { default as YoutubeIcon } from "./YoutubeIcon";
 export { default as SunIcon } from "./SunIcon";
 export { default as MoonIcon } from "./MoonIcon";
+export {default as AirbnbIcon} from "./AirbnbIcon";
+export {default as MagnifyIcon} from "./MagnifyIcon";
+export {default as GlobeIcon} from "./GlobeIcon";
+export {default as MenuIcon} from "./MenuIcon";
+export {default as UserIcon} from "./UserIcon";

@@ -74,6 +74,18 @@ module.exports = {
                     "100%": { left: "125%" },
                 },
             },
+
+            /*For width */
+            width: {
+                '300': "300px",
+                '30': "30px",
+            },
+
+            /*For radius*/
+            borderRadius: {
+                '40': '40px',
+                '22': '22px',
+            },
         },
         boxShadow: {
             cart: "0 3px 6px rgba(0,0,0,0.12)",

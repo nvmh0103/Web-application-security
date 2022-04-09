@@ -17,7 +17,7 @@ const jokesApi = axios.create({
 });
 
 export const AxiosExample = () => {
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<{ message: string }>({ message: "" });
     const [isLoaded, setIsLoaded] = useState(false);
     const [data, setData] = useState([]);
 
@@ -59,9 +59,9 @@ export const AxiosExample = () => {
                 <h2>Fetch Data Fetching Example</h2>
             </header>
             <main data-testid="joke-container">
-                <p>Programmer Jokes {`#${data[0].id}`}</p>
-                <p>{data[0].setup}</p>
-                <p>{data[0].punchline}</p>
+                <p>Programmer Jokes {`#${data[0]?.["id"]}`}</p>
+                <p>{data[0]?.["setup"]}</p>
+                <p>{data[0]?.["punchline"]}</p>
             </main>
             <footer>
                 <a

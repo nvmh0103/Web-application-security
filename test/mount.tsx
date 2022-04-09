@@ -13,7 +13,7 @@ import store from "@redux/store";
  * please visit https://enzymejs.github.io/enzyme/
  */
 
-const AllTheProviders = ({ children }) => {
+const AllTheProviders = ({ children }: { children?: React.ReactNode }) => {
     const queryClient = new QueryClient();
 
     return (

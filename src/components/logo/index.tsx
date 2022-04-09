@@ -1,9 +1,10 @@
 import React from "react";
-import { NextjsIcon } from "@components/icons";
+import { AirbnbIcon } from "@components/icons";
+
 
 export const Logo: React.FC = () => {
     return (
-        <NextjsIcon
+        <AirbnbIcon
             data-test="icon"
             className="text-white mx-auto"
             width="96"

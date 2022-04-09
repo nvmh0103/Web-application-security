@@ -1,6 +1,6 @@
-import { AxiosExample } from "./index";
+// import { AxiosExample } from "./index";
 import "./mocks";
-import { mockResponse } from "./mocks";
+// import { mockResponse } from "./mocks";
 
 describe("Axios testing with enzyme and nock", () => {
     it("renders without crashing", async () => {

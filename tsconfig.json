@@ -57,7 +57,12 @@
       ],
       "@test": [
         "test"
+      ],
+
+      "@utils/*": [
+        "src/utils/*"
       ]
+
     },
     "incremental": true
   },

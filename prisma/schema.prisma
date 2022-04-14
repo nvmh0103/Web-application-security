@@ -52,15 +52,14 @@ model Rooms{
   locationId Int
   pictures Medias[]
   bookings Bookings[]
-  reviews Review[]
+  reviews Reviews[]
 }
 
 model Locations{
   id Int @id @default(autoincrement())
-  latitue Float
-  longitude Float
-  address String
-  roomId Int
+  name String
+  latitude Float?
+  longitude Float?
   rooms Rooms[]
 }
 
@@ -86,7 +85,7 @@ model Bookings{
   updatedAt DateTime @default(now())
 }
 
-model Review{
+model Reviews{
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())

@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const lusca = require('lusca');
+const lusca = require('lusca')
+const helmet = require('helmet');
 const compression = require('compression');
 
 require('dotenv').config()
@@ -26,7 +27,7 @@ app.use(helmet());
 // using compression to reduce size
 app.use(compression());
 
-// setting crsf protection
+// setting csrf protection
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 

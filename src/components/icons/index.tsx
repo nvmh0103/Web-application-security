@@ -11,3 +11,5 @@ export {default as MagnifyIcon} from "./MagnifyIcon";
 export {default as GlobeIcon} from "./GlobeIcon";
 export {default as MenuIcon} from "./MenuIcon";
 export {default as UserIcon} from "./UserIcon";
+export {default as FacebookIcon} from "./FacebookIcon";
+export {default as InstagramIcon} from "./InstagramIcon";

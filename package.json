@@ -25,6 +25,7 @@
     "cypress:test": "start-server-and-test start http://localhost:3000 cypress:run"
   },
   "dependencies": {
+    "@fontsource/montserrat": "^4.5.7",
     "@fontsource/prata": "^4.5.5",
     "@fontsource/roboto": "^4.5.5",
     "@heroicons/react": "^1.0.6",

@@ -31,6 +31,10 @@ module.exports = {
                 facebookHover: "#395fad",
                 google: "#4285F4",
                 googleHover: "#307bf9",
+                'firstCard': '#bc1a6e',
+                'secondCard': '#cc2d4a',
+                'thirdCard': '#d93b30',
+                'fourthCard': '#de3151',
                 gray: {
                     50: "#FBFBFB",
                     100: "#F1F1F1",
@@ -44,6 +48,8 @@ module.exports = {
                     700: "#292929",
                     800: "#707070",
                 },
+
+                
             },
             fontSize: {
                 "10px": ".625rem",
@@ -56,6 +62,7 @@ module.exports = {
             },
             height: {
                 "68px": "68px",
+                '218': '218px',
             },
             minHeight: {
                 "50px": "50px",
@@ -85,6 +92,10 @@ module.exports = {
             borderRadius: {
                 '40': '40px',
                 '22': '22px',
+            },
+
+            backgroundImage: {
+                'headerCard1': 'url("https://a0.muscache.com/im/pictures/c1bdf53f-2a19-4529-aa9b-1b0e6bd8d0ee.jpg?im_w=720")',
             },
         },
         boxShadow: {

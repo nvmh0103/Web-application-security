@@ -1,21 +1,33 @@
 import React from "react";
 
-import data from "@public/meta.json";
+import data from "@public/location.json";
 
 export const Cards: React.FC = () => {
     return (
-        <div className="flex-1 container my-8 max-w-screen-lg mx-auto p-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {(data?.plugins ?? []).map((plugin) => (
+        <div className="flex-1 container my-4 ">
+            <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 w-full ">
+                {(data?.item ?? []).map((item) => (
                     <div
-                        key={plugin.name}
-                        className="col-span-1 rounded-md border border-gray-300 p-5"
+                        key={item.img}
+                        className="col-span-1 rounded-xl border text-white cursor-pointer "
                     >
-                        <h2 className="text-xl font-semibold mb-2">
-                            {plugin.name}
-                        </h2>
-                        <p className="m-0">{plugin.description}</p>
+                        <img
+                            className="rounded-t-xl object-fit w-full"
+                            src={item.img}
+                            alt=""
+                        />
+
+                       
+                            <div className={item.style}>
+                                <h2 className="text-4xl font-semibold mb-2">
+                                    {item.location}
+                                </h2>
+                                <p className="m-0 text-xl">{item.distance}</p>
+                            </div>
+                        
                     </div>
+
+                    
                 ))}
             </div>
         </div>

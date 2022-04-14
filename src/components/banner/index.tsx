@@ -10,11 +10,11 @@ export const Banner: React.FC = () => {
                 objectFit="cover"
             />
 
-            <div className="absolute text-white top-3/4 w-full text-center">
-                <p className=" sm:text-lg 2xl:text-4xl font-bold" >
+            <div className="absolute text-white top-2/3 w-full text-center">
+                <p className=" sm:text-lg 2xl:text-5xl font-bold " >
                     Hãy để trí tò mò của bạn dẫn lối
                 </p>
-                <button className="text-purple-500 bg-white px-10 py-4 shadow-md rounded-full font-bold my-3 hover:shadow-xl active:scale-90 transition duration-150">
+                <button className="text-purple-600 text-base bg-white mt-8 px-10 py-4 shadow-md rounded-full font-bold my-3 hover:shadow-xl active:scale-90 transition duration-150">
                     Tìm kiếm linh hoạt
                 </button>
             </div>

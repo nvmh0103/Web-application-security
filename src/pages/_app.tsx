@@ -27,6 +27,7 @@ import "@fontsource/roboto/300-italic.css";
 // import "@fontsource/open-sans/700.css";
 // import "@fontsource/satisfy";
 import "@fontsource/prata";
+import "@fontsource/montserrat"
 // external
 import "react-toastify/dist/ReactToastify.css";
 // base css file

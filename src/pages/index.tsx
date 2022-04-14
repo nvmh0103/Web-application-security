@@ -4,6 +4,7 @@ import "tailwind.config";
 import { Button } from "@components";
 import { Container, Header, Main, Footer, Cards, Logo } from "@components";
 import { Banner } from "@components/banner";
+import { Router } from "next/router";
 
 const Home: React.FC = () => {
     return (

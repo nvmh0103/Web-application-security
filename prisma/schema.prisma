@@ -10,9 +10,93 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   id      Int      @id @default(autoincrement())
   email   String   @unique
-  name    String?
+  name    String
   password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  role Role @default(User)
+  phoneNumber String?
+  profileImage String?
+  ownedRoom Rooms[]
+  bookings Bookings[]
+}
+
+model Rooms{
+  id Int @id @default(autoincrement())
+  name String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  homeType String
+  roomType String
+  totalOccupancy Int?
+  totalBedrooms Int?
+  totalBathrooms Int?
+  summary String?
+  address String?
+  hasTv Boolean?
+  hasKitchen Boolean?
+  hasAirCon Boolean?
+  hasHeating Boolean?
+  hasInternet Boolean?
+  price Int
+  rating Int
+  pubishedAt DateTime @default(now())
+  owner Users @relation(fields: [ownerId], references: [id])
+  ownerId Int
+  longtitude Float?
+  latitude Float?
+  location Locations @relation(fields: [locationId], references: [id])
+  locationId Int
+  pictures Medias[]
+  bookings Bookings[]
+  reviews Review[]
+}
+
+model Locations{
+  id Int @id @default(autoincrement())
+  latitue Float
+  longitude Float
+  address String
+  roomId Int
+  rooms Rooms[]
+}
+
+model Medias{
+  id Int @id @default(autoincrement())
+  url String
+  type String
+  room Rooms @relation(fields: [roomId], references: [id])
+  roomId Int
+}
+
+model Bookings{
+  id Int @id @default(autoincrement())
+  startAt DateTime
+  endAt DateTime
+  totalPrice Int
+  status String
+  userId Int
+  user Users @relation(fields: [userId], references: [id])
+  roomId Int
+  room Rooms @relation(fields: [roomId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Review{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  rating Int
+  comment String
+  roomId Int
+  room Rooms @relation(fields: [roomId], references: [id])
+}
+
+enum Role{
+  User
+  Admin
 }

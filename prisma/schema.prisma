@@ -99,4 +99,5 @@ model Review{
 enum Role{
   User
   Admin
+  Host
 }

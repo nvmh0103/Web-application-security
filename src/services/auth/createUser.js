@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 const createUser = async (req, res) => {
     try {
         req.body.password = await brcypt.hash(req.body.password, 10);
-        const user = await prisma.user.create({
+        const user = await prisma.users.create({
             data: {
                 ...req.body
             }

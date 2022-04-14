@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
         const {email} = jwt.verifyToken(req.session.jwtToken);
         req.email = email;
         const user = prisma.users.findUnique({where: {email}});
-        if (user.role != 'User'){
+        if (user.role != 'Admin'){
             return request.NotAuthorizedError(res);
         }
         next();  

@@ -5,8 +5,14 @@ class requests{
         }
         return res.status(200).send({message});
     }
+    getManyRequest (res, message, returnObj, pagination){
+        return res.status(200).send({message, data: returnObj, pagination});
+    }
     badRequest(res, err){
         return res.status(400).send({err});
+    }
+    notFoundRequest(res, message){
+        return res.status(404).send({message});
     }
     InteralServerError(res, err){
         return res.status(500).send({err});

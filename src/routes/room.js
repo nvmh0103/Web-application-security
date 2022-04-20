@@ -7,7 +7,8 @@ const router = new express.Router();
 
 // create auth
 router.post('/', auth, roomController.createRoom);
-router.get('/', roomController.getRoom);
+router.get('/', roomController.getRooms);
+router.get('/:id', roomController.getSpecificRoom);
 
 
 module.exports = router;

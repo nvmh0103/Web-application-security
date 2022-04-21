@@ -5,8 +5,21 @@ import { Button } from "@components";
 import { Container, Header, Main, Footer, Cards, Logo } from "@components";
 import { Banner } from "@components/banner";
 import { Router } from "next/router";
+import { Modal } from "@components/modal";
+import { useEffect, useState } from "react";
+import { useMouseWheel } from "react-use";
+import { useRouter } from "next/router";
+
+
 
 const Home: React.FC = () => {
+
+    // const [closeModal, isCloseModal] = useState(false);
+
+    // const handleClose = () => {
+    //     isCloseModal(true);
+    // };
+
     return (
         <Container>
             <Head>
@@ -21,7 +34,13 @@ const Home: React.FC = () => {
                 ></link>
             </Head>
 
+            
+
             <Header />
+
+            <div className="z-[1000]">
+                <Modal />
+            </div>
 
             <Banner />
 

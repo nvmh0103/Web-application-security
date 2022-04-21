@@ -10,9 +10,14 @@ import {
     InstagramIcon,
 } from "@components/icons";
 
-import { CurrencyDollarIcon } from "@heroicons/react/solid";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 export const Footer: React.FC = () => {
+
+    const languageOption = ['Tiếng Việt (VN)', 'English (EN)'];
+    const currencyOption = ['VND', 'USD'];
+
     return (
         <>
             <div className="bg-gray-200 grid grid-cols-1 md:grid-cols-4 gap-10 px-16 py-14 text-black font-normal">

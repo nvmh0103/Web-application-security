@@ -13,3 +13,7 @@ export {default as MenuIcon} from "./MenuIcon";
 export {default as UserIcon} from "./UserIcon";
 export {default as FacebookIcon} from "./FacebookIcon";
 export {default as InstagramIcon} from "./InstagramIcon";
+export {default as ColorFacebookIcon} from "./ColorFacebookIcon";
+export {default as GoogleIcon} from "./GoogleIcon";
+export {default as AppleIcon} from "./AppleIcon";
+export {default as MailIcon} from "./MailIcon";

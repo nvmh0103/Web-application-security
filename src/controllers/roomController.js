@@ -10,5 +10,11 @@ class roomController {
     getSpecificRoom(req, res){
         room.getSpecificRoom(req, res);
     }
+    updateRoom(req, res){
+        room.updateRoom(req, res);
+    }
+    deleteRoom(req, res){
+        room.deleteRoom(req, res);
+    }
 }
 module.exports = new roomController();

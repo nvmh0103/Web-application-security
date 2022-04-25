@@ -20,6 +20,7 @@ model Users {
   role Role @default(User)
   phoneNumber String?
   profileImage String?
+  review Reviews[]
   ownedRoom Rooms[]
   bookings Bookings[]
 }
@@ -91,6 +92,8 @@ model Reviews{
   updatedAt DateTime @default(now())
   rating Int
   comment String
+  userId Int
+  user Users @relation(fields: [userId], references: [id])
   roomId Int
   room Rooms @relation(fields: [roomId], references: [id])
 }

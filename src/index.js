@@ -41,6 +41,7 @@ app.disable("x-powered-by");
 app.use(logging);
 app.use(cookieSession({
     signed: false,
+    httpOnly: true,
 }))
 
 app.use('/api/v1', router);

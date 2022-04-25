@@ -2,7 +2,7 @@ const request = require('../../utils/requests');
 const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const getSpecificRoom = async (req, res) => {
+const deleteRoom = async (req, res) => {
     
         let id = req.params.id;
         if (!id){
@@ -19,4 +19,4 @@ const getSpecificRoom = async (req, res) => {
         await prisma.rooms.delete({where:{id:parseInt(id)}});
         return request.okRequest(res,"Success", room);
 }
-module.exports = getSpecificRoom;
+module.exports = deleteRoom;

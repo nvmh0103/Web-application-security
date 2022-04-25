@@ -2,7 +2,7 @@ const request = require('../../utils/requests');
 const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const getSpecificRoom = async (req, res) => {
+const updateRoom = async (req, res) => {
     try {
         let id = req.params.id;
         if (!id){
@@ -22,4 +22,4 @@ const getSpecificRoom = async (req, res) => {
         return request.InteralServerError(res,err);
     }
 }
-module.exports = getSpecificRoom;
+module.exports = updateRoom;

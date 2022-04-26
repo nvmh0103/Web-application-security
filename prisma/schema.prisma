@@ -67,7 +67,7 @@ model Locations{
 model Medias{
   id Int @id @default(autoincrement())
   url String
-  type String
+  type MediaTypes
   room Rooms @relation(fields: [roomId], references: [id])
   roomId Int
 }
@@ -76,6 +76,7 @@ model Bookings{
   id Int @id @default(autoincrement())
   startAt DateTime
   endAt DateTime
+  paid Boolean @default(false)
   totalPrice Int
   status String
   userId Int
@@ -102,4 +103,9 @@ enum Role{
   User
   Admin
   Host
+}
+
+enum MediaTypes{
+  Thumbnail
+  Image
 }

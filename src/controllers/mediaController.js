@@ -1,17 +1,17 @@
-const {media} = require('../services');
+const {user} = require('../services');
 
 class MediaController {
     createMedia(req, res){
-        media.createMedia(req, res);
+        user.media.createMedia(req, res);
     }
     getMedias(req, res){
-        media.getMedia(req, res);
+        user.media.getMedia(req, res);
     }
     updateMedia(req, res){
-        media.updateMedia(req, res);
+        user.media.updateMedia(req, res);
     }
     deleteMedia(req, res){
-        media.deleteMedia(req, res);
+        user.media.deleteMedia(req, res);
     }
 }
 module.exports = new MediaController();

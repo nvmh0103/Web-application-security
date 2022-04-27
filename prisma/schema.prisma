@@ -30,6 +30,7 @@ model Rooms{
   name String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  approved Boolean @default(false)
   homeType String
   roomType String
   totalOccupancy Int?

@@ -14,7 +14,7 @@ const handleFilterQuery = async (req) => {
         minPrice,
         maxPrice,
         sortBy,
-        orderBy
+        orderBy,
     } = req.query;
     const filter = {
         ...(locationId && { locationId: parseInt(locationId) } ),

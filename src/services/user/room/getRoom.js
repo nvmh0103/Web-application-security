@@ -10,8 +10,22 @@ const getRoom = async (req, res) => {
         if (!page){
             return request.badRequest(res, 'Please provide page');
         }
-        const {filter, sort} = await handleFilterQuery(req);
-        console.log(filter);
+        let {filter, sort} = await handleFilterQuery(req);
+        if (req.query.startAt && req.query.endAt){
+            let bookings = {
+                bookings: {
+                    some:{
+                        startAt: {
+                            gte: new Date(req.query.startAt)
+                        },
+                        endAt: {
+                            lte: new Date(req.query.endAt)
+                        }
+                    }
+                }
+            }
+            filter = {...filter, ...{NOT: bookings}};
+        }
         const limit = req.query.limit || process.env.DEFAULT_PAGINATION;
         const rooms = await prisma.rooms.findMany({
             skip: (page-1) * limit,

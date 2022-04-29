@@ -10,7 +10,7 @@ const getBooking = async (req, res) => {
             return request.badRequest(res, 'Please provide page');
         }
         const limit = req.query.limit || process.env.DEFAULT_PAGINATION;
-        const Bookings = await prisma.Bookings.findMany({
+        const Bookings = await prisma.bookings.findMany({
             skip: (page-1) * limit,
             take: parseInt(limit),
             where:{

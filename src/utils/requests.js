@@ -17,6 +17,9 @@ class requests{
     InteralServerError(res, err){
         return res.status(500).send({err});
     }
+    NotLoggedInError(res){
+        return res.status(401).send({err: 'Please log in!'});
+    }
     NotAuthorizedError(res){
         return res.status(403).send({err: 'Not Authorized'});
     }

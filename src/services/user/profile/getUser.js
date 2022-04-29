@@ -8,6 +8,12 @@ const getUser = async (req, res) => {
         const user = await prisma.users.findUnique({
             where:{
                 email: req.email
+            },
+            select:{
+                email: true,
+                name: true,
+                phoneNumber: true,
+                profileImage: true,
             }
         })
         return request.okRequest(res, "Success", user);

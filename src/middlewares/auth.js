@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 const auth = async (req, res, next) => {
     if (req.session.jwtToken == null){
-        return request.NotAuthorizedError(res);
+        return request.NotLoggedInError(res);
     }
     try {
         const {email} = jwt.verifyToken(req.session.jwtToken);

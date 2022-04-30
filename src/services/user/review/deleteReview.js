@@ -16,6 +16,24 @@ const deleteReview = async (req, res) => {
             return request.notFoundRequest(res, "Review not found!");
         }
         const deletedReview = await prisma.reviews.delete({where:{id:parseInt(id)}});
+        // update room rating
+        const room = await prisma.rooms.findUnique({
+            where:{
+                id: review.roomId
+            }
+        });
+        let currentRating = room.rating * room.totalReviews;
+        currentRating -= review.rating;
+        currentRating /= (room.totalReviews - 1);
+        await prisma.rooms.update({
+            where:{
+                id: review.roomId
+            },
+            data:{
+                rating: currentRating,
+                totalReviews: room.totalReviews - 1
+            }
+        })
         return request.okRequest(res,"Success", deletedReview);
 }
 module.exports = deleteReview;

@@ -8,7 +8,7 @@
     "start": "nodemon src/index.js",
     "migrate": "npx prisma migrate dev --name airbnb",
     "postgres": "docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=password postgres && npm run migrate",
-    "rabbitmq": "docker run -d --hostname my-rabbit --name some -p 5672:5672 rabbit"
+    "rabbitmq": "docker rm some && docker run -d --hostname my-rabbit --name some -p 5672:5672 rabbit"
   },
   "repository": {
     "type": "git",

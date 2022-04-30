@@ -39,12 +39,24 @@ const createReview = async (req, res) => {
             }
         })
         // update room rating
-        const room = await prisma.rooms.findOne({
+        const room = await prisma.rooms.findUnique({
             where:{
                 id: roomId
             }
         });
         // TODO: update rating
+        let currentRating = room.rating * room.totalReviews;
+        currentRating += review.rating;
+        currentRating /= (room.totalReviews + 1);
+        await prisma.rooms.update({
+            where:{
+                id: roomId
+            },
+            data:{
+                rating: currentRating,
+                totalReviews: room.totalReviews + 1
+            }
+        })
         return request.createSuccessRequest(res,'Review created successfully', {review});
     } catch (err){
         return request.InteralServerError(res,err);

@@ -55,6 +55,7 @@ model Rooms{
   pictures Medias[]
   bookings Bookings[]
   reviews Reviews[]
+  totalReviews Int @default(0)
 }
 
 model Locations{

@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/index.js",
     "migrate": "npx prisma migrate dev --name airbnb",
-    "postgres": "docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=password postgres && npm run migrate"
+    "postgres": "docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=password postgres && npm run migrate",
+    "rabbitmq":"docker run -d --hostname my-rabbit --name some -p 5672:5672 rabbit"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/nvmh0103/Web-application-security#readme",
   "dependencies": {
     "@prisma/client": "^3.11.1",
+    "amqplib": "^0.8.0",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cookie-session": "^2.0.0",

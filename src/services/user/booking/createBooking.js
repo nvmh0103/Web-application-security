@@ -1,6 +1,7 @@
 const {PrismaClient} = require('@prisma/client');
 const { badRequest } = require('../../../utils/requests');
 const request = require('../../../utils/requests');
+const publisher = require('../../../events/publish');
 
 
 const prisma = new PrismaClient()
@@ -44,6 +45,7 @@ const createBooking = async (req, res) => {
                 ...req.body
             }
         })
+        publisher("booking_exchange", "booking_events", "booking_rkey", booking.id.toString(), 1000*20);
         return request.createSuccessRequest(res,'Booking created successfully', {booking});
   
 }

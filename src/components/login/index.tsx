@@ -3,9 +3,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useMouseWheel } from "react-use";
-import clickOutside from "@utils/clickOutside";
 import { useForm } from "react-hook-form";
 import { useOnClickOutside } from "usehooks-ts";
+import { Menu } from "@components/menu";
 import {
     AppleIcon,
     ColorFacebookIcon,
@@ -13,14 +13,17 @@ import {
     InstagramIcon,
     MailIcon,
 } from "@components/icons";
-import classNames from "classnames";
+// import classNames from "classnames";
+import { Hidden } from "@material-ui/core";
 
 type User = {
     username: string;
     password: string;
 };
 
-export const Modal: React.FC = () => {
+
+
+export const Login: React.FC = () => {
     const {
         register,
         handleSubmit,
@@ -31,13 +34,9 @@ export const Modal: React.FC = () => {
         alert(JSON.stringify(data));
     });
 
-    // const {closeModal} = useUI();
-
- 
-
     const ref = useRef(null);
     const handleClickOutside = () => {
-        // Your custom logic here
+        
         console.log("clicked outside");
     };
 
@@ -48,24 +47,28 @@ export const Modal: React.FC = () => {
 
     useOnClickOutside(ref, handleClickOutside);
 
+
     return (
-        <div className="center inline-block bg-white relative rounded-22 ">
-            <div className="modalContainer  text-black "  onClick={handleClickInside}>
+        <div className="center block bg-white relative border border-gray-400 rounded-xl w-full lg:w-2/5 mx-auto lg:mt-14 lg:mb-10 ">
+            <div
+                className=" text-black "
+               
+            >
                 {/* Title */}
-                <div className="items-center  sticky top-0 border-b border-gray-500 bg-white py-[25px] rounded-t-22">
-                    <button
+                <div className="items-center  lg:relative sticky top-0 border-b border-gray-500 bg-white py-[25px] rounded-t-22">
+                    {/* <button
                         ref={ref}
                         className="absolute hover:bg-gray-200 rounded-full ml-6"
-                       
+                        onClick={() => {}}
                     >
                         X
-                    </button>
+                    </button> */}
                     <div className=" text-center">
                         <h1>Đăng nhập hoặc đăng ký</h1>
                     </div>
                 </div>
 
-                <div className="overflow-y-auto">
+                <div className="">
                     {/* Body */}
                     <div className="p-6 ">
                         <h2 className="text-[22px] leading-6">
@@ -170,4 +173,4 @@ export const Modal: React.FC = () => {
     );
 };
 
-export default Modal;
+export default Login;

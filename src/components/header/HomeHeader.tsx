@@ -6,17 +6,31 @@ import { Button } from "@components/button";
 import { AirbnbIcon, GlobeIcon, MenuIcon, UserIcon } from "@components/icons";
 import { useMouseWheel } from "react-use";
 import { useEffect, useState } from "react";
+import Search from "@components/search";
 
-export const HomeHeader: React.FC = () => {
+interface Props {
+    className?: string;
+    title?: string;
+    place?: string;
+}
+
+export const HomeHeader: React.FC<Props> = ({
+    className = "",
+    title = "Bắt đầu tìm kiếm",  
+    place = "Bạn sắp đi đâu?",
+    
+}) => {
 
     const [state, setState] = useState("");
+    const [stateMenu, setStateMenu] = useState(false);
+    const [stateSearch, setStateSearch] = useState(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState(event.target.value);
     };
 
     return (
-        <>
+        <div className={className}>
             <div className="text-center bg-black grid md:grid-cols-3 grid-cols-2 px-20 py-3 items-center justify-between ">
                 <div className="flex items-center h-10 cursor-pointer my-auto ">
                     <a className="" href="#">
@@ -25,12 +39,13 @@ export const HomeHeader: React.FC = () => {
                 </div>
 
                 <div className=" items-center text-white hidden md:flex cursor-pointer justify-between space-x-8">
-                    <a className="inline-block relative justify-center items-center">
+                    <a className="inline-block relative justify-center items-center hover:border-b border-white transition duration-200 ease-out">
                         Nơi ở
                     </a>
-                    <a>Trải nghiệm</a>
 
-                    <div className="items-center text-white">
+                    <a className="inline-block relative justify-center items-center hover:border-b border-white transition duration-200 ease-out">Trải nghiệm</a>
+
+                    <div className="items-center text-white inline-block relative justify-center hover:border-b border-white transition duration-200 ease-out">
                         <a>Trải nghiệm trực tuyến</a>
                     </div>
                 </div>
@@ -63,54 +78,10 @@ export const HomeHeader: React.FC = () => {
             </div>
 
             <div className="pb-8 bg-black">
-                    <div className="flex border border-gray-500 mx-[20%] rounded-40 justify-between items-center bg-white">
-                        <div className=" rounded-full flex-1 py-1 ">
-                            <p className="px-5 md:text-left text-center">
-                                <p>Địa điểm</p>
-
-                                <input
-                                    type="text"
-                                    onChange={(e) => handleChange(e)}
-                                    value={state || ""}
-                                    placeholder="Bạn sắp đi đâu?"
-                                    className=" text-base w-full outline-0 md:text-left text-center"
-                                />
-                            </p>
-                            {/* <div className="border-r h-[30px]"></div> */}
-                        </div>
-
-                        <div className="hidden md:inline-block border-l border-gray-500  flex-1">
-                            <div className="hover:bg-gray-500 cursor-pointer rounded-40 px-5 py-1 ">
-                                <p className="m-0">Nhận phòng</p>
-                                <p className="text-gray-400">Thêm ngày</p>
-                            </div>
-                        </div>
-
-                        <div className="hidden md:inline-block border-l border-gray-500  flex-1">
-                            <div className="hover:bg-gray-500 cursor-pointer rounded-40 px-5 py-1 ">
-                                <p className="m-0">Trả phòng</p>
-                                <p className="text-gray-400">Thêm ngày</p>
-                            </div>
-                        </div>
-
-                        <div className=" border-l border-gray-500  ">
-                            <div className="hover:bg-gray-500 cursor-pointer rounded-40 px-5 py-1 flex ">
-                                <div className="hidden md:inline-block">
-                                    <p className="m-0">Khách</p>
-                                    <p>Thêm khách</p>
-                                </div>
-                                <div className="md:pl-5 ">
-                                    <SearchIcon
-                                        className="md:h-12 h-8 bg-red-500 text-white rounded-full cursor-pointer p-2 md:mx-2 md:w-12 w-8"
-                                        href="#"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                   <Search className="pb-8 bg-black"/>
+            </div>
             
 
-        </>
+        </div>
     );
 };

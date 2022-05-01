@@ -15,7 +15,7 @@ const SvgGoogleIcon = ({
             width={width}
             height={height}
         >
-            <g fill="none" fill-rule="evenodd">
+            <g fill="none" fillRule="evenodd">
                 <path
                     d="M9 3.48c1.69 0 2.83.73 3.48 1.34l2.54-2.48C13.46.89 11.43 0 9 0 5.48 0 2.44 2.02.96 4.96l2.91 2.26C4.6 5.05 6.62 3.48 9 3.48z"
                     fill="#EA4335"

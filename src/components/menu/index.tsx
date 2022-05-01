@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { Modal } from "@components/modal";
+import { Login } from "@components/login";
+
+
 
 export const Menu: React.FC = () => {
     const [openModal, setOpenModal] = useState(false);
+
+ 
+    
 
     return (
         <div className="">
@@ -10,7 +15,7 @@ export const Menu: React.FC = () => {
                 <ul className="space-y-3 font-normal">
                     <li className="font-bold hover:bg-gray-300 py-1 px-5">
                         <a
-                            href="#"
+                            href="/login"
                             onClick={() => {
                                 setOpenModal(true);
                             }}
@@ -20,7 +25,7 @@ export const Menu: React.FC = () => {
                     </li>
                     <li className="hover:bg-gray-300 py-1 px-5">
                         <a
-                            href="#"
+                            href="/login"
                             onClick={() => {
                                 setOpenModal(true);
                             }}
@@ -41,7 +46,7 @@ export const Menu: React.FC = () => {
                 </ul>
             </div>
 
-            {/* {openModal && <Modal />} */}
+            
         </div>
     );
 };

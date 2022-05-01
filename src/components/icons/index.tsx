@@ -17,3 +17,5 @@ export {default as ColorFacebookIcon} from "./ColorFacebookIcon";
 export {default as GoogleIcon} from "./GoogleIcon";
 export {default as AppleIcon} from "./AppleIcon";
 export {default as MailIcon} from "./MailIcon";
+export {default as FilterIcon} from "./FilterIcon";
+export {default as ArrowDown} from "./ArrowDown";

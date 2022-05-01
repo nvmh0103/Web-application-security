@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useRef } from "react";
 import Head from "next/head";
 import "tailwind.config";
 import { Button } from "@components";
 import { Container, Header, Main, Footer, Cards, Logo } from "@components";
 import { Banner } from "@components/banner";
-import { Router } from "next/router";
-import { Modal } from "@components/modal";
+import router, { Router } from "next/router";
+
 import { useEffect, useState } from "react";
 import { useMouseWheel } from "react-use";
 import { useRouter } from "next/router";
+import { useOnClickOutside} from "usehooks-ts";
 
+import cors from "cors";
 
+function Redirect({to}) {
+    useEffect(() => {
+        router.push(to);
+    }, [to]);
+    return null;
+}
 
 const Home: React.FC = () => {
 
-    // const [closeModal, isCloseModal] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-    // const handleClose = () => {
-    //     isCloseModal(true);
-    // };
+    // const router = useRouter();
+    // return <Redirect to="" />;
 
     return (
         <Container>
@@ -38,10 +45,7 @@ const Home: React.FC = () => {
 
             <Header />
 
-            <div className="z-[1000]">
-                <Modal />
-            </div>
-
+            
             <Banner />
 
             <Main/>

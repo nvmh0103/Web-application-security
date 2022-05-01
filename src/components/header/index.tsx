@@ -1,39 +1,40 @@
 import React from "react";
 import { StickyHeader } from "./StickyHeader";
-import { HomeHeader } from "./HomeHeader"
+import { HomeHeader } from "./HomeHeader";
 import { SearchIcon } from "@heroicons/react/solid";
 import { Logo } from "@components";
 import { Button } from "@components/button";
 import { AirbnbIcon, GlobeIcon, MenuIcon, UserIcon } from "@components/icons";
 import { useMouseWheel } from "react-use";
-import { useEffect, useState } from "react";
-import { Router } from "next/router";
-import { Modal } from "@components/modal";
+import { useEffect, useState, useRef } from "react";
+import router, { Router } from "next/router";
 
-function ChangeSticky() {
-    
-}
 
 export const Header: React.FC = () => {
+    const [scrolled, setScrolled] = useState(false);
 
-    const [stateHeader, setStateHeader] = useState("");
+    useEffect(() => {
+        const onScroll = () => {
+            if (window.scrollY > 0) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+        window.addEventListener("scroll", onScroll);
 
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
 
     return (
         <>
-            <div className="hidden">
-            <HomeHeader 
 
-            />
-            </div>
+     
+            {scrolled ? <StickyHeader /> : <HomeHeader 
+            className="transition"/>}
+        
 
-            
-            <StickyHeader />
 
-            <div className="">
-                <Modal />
-            </div>
         </>
-
     );
 };

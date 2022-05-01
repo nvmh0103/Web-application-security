@@ -1,0 +1,82 @@
+{
+    "name": "searchAirbnb",
+    "item": [
+        {
+            "img": "https://a0.muscache.com/im/pictures/e2e2bf3d-cb57-4ef0-9076-1571500da682.jpg?im_w=1440",
+            "location": "Toàn bộ nhà nghỉ dưỡng tại ",
+            "title": "Nhà 2 phòng ngủ đáng yêu với bãi đỗ xe miễn phí",
+            "description": "4 khách · 2 phòng ngủ · 1 giường · 2 phòng tắm · Wi-fi · Nhà bếp · Chỗ đỗ xe miễn phí · Máy giặt",
+            "star": 4.73,
+            "rate": 325,
+            "price": "$15",
+            "long": -0.0022275,
+            "lat": 51.5421655
+        },
+        {
+            "img": "https://a0.muscache.com/im/pictures/e2e2bf3d-cb57-4ef0-9076-1571500da682.jpg?im_w=1440",
+            "location": "Toàn bộ căn hộ cho thuê tại ",
+            "title": "Nhà của Donald Trung",
+            "description": "4 khách · 2 phòng ngủ · 2 giường · 1 phòng tắm · Wi-fi · Bếp",
+            "star": 4.3,
+            "rate": 217,
+            "price": "$40",
+            "long": -0.095091,
+            "lat": 51.48695
+        },
+        {
+            "img": "https://a0.muscache.com/im/pictures/e2e2bf3d-cb57-4ef0-9076-1571500da682.jpg?im_w=1440",
+            "location": "Toàn bộ biệt thự tại ",
+            "title": "Biệt thự Mậu Xanh",
+            "description": "16 khách · 4 phòng ngủ · 6 giường · 6 phòng tắm · Chỗ đỗ xe miễn phí · Máy giặt",
+            "star": 3.8,
+            "rate": 467,
+            "price": "$98",
+            "long": -0.135638,
+            "lat": 51.521916
+        },
+        {
+            "img": "https://a0.muscache.com/im/pictures/e2e2bf3d-cb57-4ef0-9076-1571500da682.jpg?im_w=1440",
+            "location": "Phòng riêng tại ",
+            "title": "Phòng tiện nghi Tecco",
+            "description": "2 khách · 1 studio · 1 giường · 1 phòng tắm riêng · Wi-fi · Nhà bếp · Chỗ đỗ xe miễn phí · Máy giặt",
+            "star": 4.1,
+            "rate": 314,
+            "price": "$55",
+            "long": -0.069961,
+            "lat": 51.472618
+        },
+        {
+            "img": "https://a0.muscache.com/im/pictures/e2e2bf3d-cb57-4ef0-9076-1571500da682.jpg?im_w=1440",
+            "location": "Phòng khách sạn tại",
+            "title": "Phòng đôi yên tĩnh, hiện đại, mới cải tạo",
+            "description": "2 khách · 1 phòng ngủ · 1 giường ",
+            "star": 5.0,
+            "rate": 81,
+            "price": "$60",
+            "long": -0.08472,
+            "lat": 51.510794
+        },
+        {
+            "img": "https://a0.muscache.com/im/pictures/e2e2bf3d-cb57-4ef0-9076-1571500da682.jpg?im_w=1440",
+            "location": "Private room in center of London",
+            "title": "The Blue Room In London",
+            "description": "2 guests · 1 bedroom · 1 bed · 1.5 shared bathrooms · Wifi · Washing Machine",
+            "star": 4.23,
+            "rate": 198,
+            "price": "$19",
+            "long": -0.094116,
+            "lat": 51.51401
+        },
+        {
+            "img": "https://a0.muscache.com/im/pictures/e2e2bf3d-cb57-4ef0-9076-1571500da682.jpg?im_w=1440",
+            "location": "Private room in center of London",
+            "title": "5 Star Luxury Apartment",
+            "description": "3 guests · 1 bedroom · 1 bed · 1.5 shared bathrooms · Wifi · Kitchen · Free parking · Washing Machine",
+            "star": 3.85,
+            "rate": 256,
+            "price": "$90",
+            "long": -0.109889,
+            "lat": 51.521245
+        }
+    ]
+}

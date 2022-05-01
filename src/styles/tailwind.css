@@ -757,32 +757,7 @@ body {
         line-height: 1.333;
         /* font-family: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif */
     }
-    .joolux-checkbox-label {
-        -webkit-box-align: center;
-        align-items: center;
-        cursor: pointer;
-        display: inline-flex;
-    }
-    .joolux-checkbox-group {
-        border-width: 2px;
-        display: inline-flex;
-        -webkit-box-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        justify-content: center;
-        transition-property: all;
-        transition-duration: 200ms;
-        background-color: #fff;
-        border-color: #101010;
-        width: 12px;
-        height: 12px;
-    }
-    .joolux-checbox-icon {
-        transition-property: all;
-        transition-duration: 200ms;
-        color: #fff;
-        opacity: 0;
-    }
+    
     /* Cart */
     .cart-sum-card {
         width: 100%;
@@ -1127,7 +1102,11 @@ body {
         margin-bottom: 0.75rem;
         height: 40px;
     }
+
+    
 }
+
+
 
 /* Blog */
 
@@ -1746,30 +1725,10 @@ video {
 	background-color: #d93b30;
 }
 
-.modalBackground {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(200, 200, 200);
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalContainer {
-    width: 500px;
-    height: 500px;
-    border-radius: 12px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    display: flex;
-    flex-direction: column;
-    
-  }
+#hoverToChange:hover ~ #changeBackground {
+    background: #ccc
+}
 
-  .center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+.mapboxgl-ctrl-logo {
+    display: none !important;
+}

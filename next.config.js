@@ -21,6 +21,14 @@ const localeSubpaths = {
     en: "en",
 };
 
+// const map = new mapboxgl.Map({
+//     container: this.mapContainer,
+//     style: "mapbox://styles/mapbox/dark-v10",
+//     center: [this.state.lng, this.state.lat],
+//     zoom: this.state.zoom,
+//     attributionControl: false,
+// });
+
 const config = {
     // webpack5: true,
     // webpack: (config) => {
@@ -86,8 +94,13 @@ const config = {
             "joolux-client.ml",
             "i.imgur.com",
             "usercontent.funipos.net",
-            "a0.muscache.com"
+            "a0.muscache.com",
         ],
+    },
+
+    env: {
+        mapbox_key:
+            "pk.eyJ1IjoiY210Y2t1b25nMTIzIiwiYSI6ImNsMmxhM2pwZjA3NHMzanBucjBxeHdrMTAifQ.8B_9ISDm1EvwvhD7j0pUcg",
     },
 };
 

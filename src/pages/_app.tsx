@@ -46,6 +46,9 @@ function handleExitComplete() {
         window.scrollTo({ top: 0 });
     }
 }
+
+
+
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     // const apolloClient = initializeApollo();
     const queryClient = new QueryClient();
@@ -78,14 +81,14 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                                 <Layout pageProps={pageProps}>
                                     {/* <DefaultSeo /> */}
                                     <NextNProgress
-                                        color="#d0af66"
-                                        startPosition={0.3}
+                                        color="#fe595e"
+                                        startPosition={0.2}
                                         stopDelayMs={200}
                                         height={3}
                                         showOnShallow={true}
                                         options={{
                                             easing: "ease",
-                                            speed: 500,
+                                            speed: 400,
                                         }}
                                     />
                                     <Component
@@ -105,6 +108,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         </AnimatePresence>
     );
 }
+
+
 
 // MyApp.getInitialProps = async (appContext) => {
 //     const appProps = await App.getInitialProps(appContext);

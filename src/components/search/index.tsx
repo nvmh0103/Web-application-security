@@ -17,11 +17,9 @@ import { addDays, format } from "date-fns";
 
 import { useOnClickOutside } from "usehooks-ts";
 
-
 interface Props {
     place?: string;
     className?: string;
-    
 }
 
 export const Search: React.FC<Props> = ({
@@ -42,13 +40,11 @@ export const Search: React.FC<Props> = ({
     // const [startDate, setStartDate] = useState(new Date());
     // const [endDate, setEndDate] = useState(new Date());
 
-    
-
     // const handleSelect = (date: any) => {
     //     setStartDate(date.selection.startDate);
     //     setEndDate(date.selection.endDate);
     // };
-   
+
     const [pickDay, setPickDay] = useState([
         {
             startDate: new Date(),
@@ -75,7 +71,10 @@ export const Search: React.FC<Props> = ({
         setOpenDay(false);
     };
 
-    const formattedStartDate = format(new Date(pickDay[0].startDate), "dd/MM/yyyy");
+    const formattedStartDate = format(
+        new Date(pickDay[0].startDate),
+        "dd/MM/yyyy",
+    );
     const formattedEndDate = format(new Date(pickDay[0].endDate), "dd/MM/yyyy");
 
     return (
@@ -130,18 +129,23 @@ export const Search: React.FC<Props> = ({
                         </div>
 
                         <div className="lg:pl-5 lg:pr-0 self-center pr-4">
-                            <a 
-                            onClick={() => {
-                                Router.push({
-                                    pathname: '/search',
-                                    query: { 
-                                        location: searchInput,
-                                        startDate: pickDay[0].startDate.toISOString(),
-                                        endDate: pickDay[0].endDate.toISOString(),
-                                        guests: guests
-                                    },
-                                })
-                            }}>
+                            <a
+                                onClick={() => {
+                                    Router.push({
+                                        pathname: "/search",
+                                        query: {
+                                            
+                                                location: searchInput,
+                                                startDate:
+                                                    pickDay[0].startDate.toISOString(),
+                                                endDate:
+                                                    pickDay[0].endDate.toISOString(),
+                                                guests: guests,
+                                        
+                                        },
+                                    });
+                                }}
+                            >
                                 <SearchIcon className="h-10 bg-red-500 text-white rounded-full cursor-pointer p-2 md:mx-2 hover:bg-red-700" />
                             </a>
                         </div>
@@ -157,14 +161,12 @@ export const Search: React.FC<Props> = ({
                         }
                         showSelectionPreview={true}
                         moveRangeOnFirstSelection={false}
-                        months={2}
+                        months={1}
                         ranges={pickDay}
-                        direction="horizontal"
+                        direction="vertical"
                         rangeColors={["#ff385c"]}
-                        startDate = {new Date()}
-                        endDate = {pickDay[0].endDate}
-                        
-
+                        startDate={new Date()}
+                        endDate={pickDay[0].endDate}
                     />
 
                     <div className="flex items-center border-b mb-3 w-[58%] bg-white">
@@ -175,7 +177,7 @@ export const Search: React.FC<Props> = ({
                             value={guests}
                             onChange={(e) => setGuests(Number(e.target.value))}
                             type="number"
-                            className="w-12 pl-2 text-lg outline-none text-red-500"
+                            className="text-lg outline-none text-red-500"
                             min={1}
                         />
                     </div>
@@ -188,17 +190,23 @@ export const Search: React.FC<Props> = ({
                             Đóng
                         </button>
                         <button className="flex-grow text-red-500 hover:bg-red-500 hover:text-white py-3 px-5 font-semibold rounded-full">
-                            <a onClick={() => {
-                                Router.push({
-                                    pathname: '/search',
-                                    query: { 
-                                        location: searchInput,
-                                        startDate: pickDay[0].startDate.toISOString(),
-                                        endDate: pickDay[0].endDate.toISOString(),
-                                        guests: guests
-                                    },
-                                })
-                            }}>Tìm kiếm</a>
+                            <a
+                                onClick={() => {
+                                    Router.push({
+                                        pathname: "/search",
+                                        query: {
+                                            location: searchInput,
+                                            startDate:
+                                                pickDay[0].startDate.toISOString(),
+                                            endDate:
+                                                pickDay[0].endDate.toISOString(),
+                                            guests: guests,
+                                        },
+                                    });
+                                }}
+                            >
+                                Tìm kiếm
+                            </a>
                         </button>
                     </div>
                 </div>

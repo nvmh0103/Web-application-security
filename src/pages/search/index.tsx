@@ -17,7 +17,7 @@ import axios from "axios";
 
 import { Map } from "@components/map";
 
-const Search: React.FC = (searchResults) => {
+const Search: React.FC = () => {
     const router = useRouter();
     const { location, startDate, endDate, guests } = router.query;
 
@@ -113,7 +113,7 @@ const Search: React.FC = (searchResults) => {
                                 Hơn 300 chỗ ở tại {location}{" "}
                             </p>
 
-                            <p className="pb-4">
+                            <p className="pb-4 m-0">
                                 Kiểm tra lại quy định hạn chế đi lại trong đại
                                 dịch COVID-19 trước khi đặt.
                                 <span>
@@ -171,7 +171,7 @@ const Search: React.FC = (searchResults) => {
                         </div>
                     </div>
 
-                    <div className="hidden xl:flex-grow xl:inline-flex lg:w-2/5  max-h-[600px] sticky top-[20%]">
+                    <div className="hidden xl:flex-grow xl:inline-flex lg:w-2/5  max-h-[600px] sticky top-[15%]">
                         <Map />
                     </div>
                 </section>

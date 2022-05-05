@@ -20,6 +20,7 @@ import Login from "@components/login";
 import { Footer } from "@components/footer";
 import {LoginHeader} from "@components/header/LoginHeader";
 import Head from "next/head";
+import Register from "@components/register";
 
 type User = {
     username: string;
@@ -31,7 +32,7 @@ interface Props {
     setIsOpen: (isOpen: boolean) => void;
 }
 
-export const City: React.FC<Props> = (
+export const SignUp: React.FC<Props> = (
     {
         // isOpen = true,
         // setIsOpen = () => {},
@@ -63,7 +64,7 @@ export const City: React.FC<Props> = (
         <div>
              <Head>
                 <title>
-                    Đăng nhập - Airbnb
+                    Đăng ký - Airbnb
                 </title>
                 <link
                     rel="icon"
@@ -74,11 +75,11 @@ export const City: React.FC<Props> = (
 
             <LoginHeader />
 
-           <Login /> 
+           <Register/> 
 
             <div className="hidden lg:block"><Footer /> </div>
         </div>
     );
 };
 
-export default City;
+export default SignUp;

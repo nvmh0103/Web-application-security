@@ -7,7 +7,11 @@ import search from "@public/search.json";
 
 import { HeartIcon } from "@heroicons/react/outline";
 import { StarIcon } from "@heroicons/react/solid";
-import router from "next/router";
+import router, {useRouter} from "next/router";
+import { addDays } from "date-fns";
+import { openInNewTab } from "@utils/openInNewTab";
+import { TableRow } from "@material-ui/core";
+import { setTarget } from "framer-motion/types/render/utils/setters";
 
 // interface infoProps {
 //     img?: string;
@@ -30,12 +34,43 @@ export const InfoCards: React.FC = () =>
     {
         const [fillHeart, setFillHeart] = useState("white");
 
-        const { location, startDate, endDate, guests } = router.query;
 
+        const Router = useRouter();
+
+        const { location, startDate, endDate, guests } = Router.query;
+
+        const [pickDay, setPickDay] = useState([
+            {
+                startDate: new Date(),
+                endDate: addDays(new Date(), 7),
+                key: "selection",
+            },
+        ]);
         return (
             <div>
                 {(search?.item ?? []).map((item) => (
-                    <div className="flex py-4 px-2 border-b border-gray-500 cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out first: border-t">
+                    <div className="flex py-4 px-2 border-b border-gray-500 cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out first: border-t"
+                    onClick={() => {{
+                        Router.push({
+                            pathname: '/rooms/[roomID]',
+                            query: { 
+                                place: location,
+                                location: item.location,
+                                title: item.title,
+                                description: item.description,
+                                star: item.star,
+                                price: item.price,
+                                img: item.img,
+
+                                roomID: "room_id="+item.id,
+                            },
+                        })
+                    }}
+                    
+                    
+                }
+                  >
+                    
                         <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0 ">
                             <Image
                                 src={item.img}

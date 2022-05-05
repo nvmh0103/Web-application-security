@@ -15,7 +15,7 @@ export const Menu: React.FC = () => {
                 <ul className="space-y-3 font-normal">
                     <li className="font-bold hover:bg-gray-300 py-1 px-5">
                         <a
-                            href="/login"
+                            href="/register"
                             onClick={() => {
                                 setOpenModal(true);
                             }}

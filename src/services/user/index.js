@@ -3,6 +3,7 @@ const booking = require('./booking');
 const profile = require('./profile');
 const review = require('./review');
 const room = require('./room');
+const location = require('./location')
 
 module.exports = {
     auth,
@@ -10,4 +11,5 @@ module.exports = {
     profile,
     review,
     room,
+    location,
 }

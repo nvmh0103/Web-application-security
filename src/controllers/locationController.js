@@ -1,4 +1,5 @@
 const {admin} = require('../services');
+const {user} = require('../services');
 
 class locationController {
     createLocation(req, res){
@@ -12,6 +13,9 @@ class locationController {
     }
     deleteLocation(req, res){
         admin.location.deleteLocation(req, res);
+    }
+    searchLocation(req, res){
+        user.location.searchLocation(req, res);
     }
 }
 module.exports = new locationController();

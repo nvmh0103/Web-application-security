@@ -21,6 +21,12 @@ class authController {
     loginAdmin(req, res){
         admin.auth.login(req, res);
     }
+    checkEmail(req, res){
+        user.auth.checkEmail(req, res);
+    }
+    isLoggedIn(req, res){
+        user.auth.isLogged(req, res);
+    }
 }
 
 module.exports = new authController();

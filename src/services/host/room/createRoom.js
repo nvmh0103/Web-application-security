@@ -16,6 +16,7 @@ const createRoom = async (req, res) => {
                 id: req.body.location
             }
         }
+        req.body.approved = false;
         const room = await prisma.rooms.create({
             data: {
                 ...req.body

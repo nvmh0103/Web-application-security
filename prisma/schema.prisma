@@ -60,6 +60,7 @@ model Rooms{
 
 model Locations{
   id Int @id @default(autoincrement())
+  displayName String
   name String
   latitude Float?
   longitude Float?

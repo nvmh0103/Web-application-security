@@ -1,5 +1,6 @@
 const {host} = require('../services');
 const {user} = require('../services');
+const {admin} = require('../services');
 
 class roomController {
     createRoom(req, res){
@@ -16,6 +17,9 @@ class roomController {
     }
     deleteRoom(req, res){
         host.room.deleteRoom(req, res);
+    }
+    approveRoom(req, res){
+        admin.room.approveRoom(req, res);
     }
 }
 module.exports = new roomController();

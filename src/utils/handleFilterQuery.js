@@ -30,6 +30,7 @@ const handleFilterQuery = async (req) => {
         ...(roomType && { roomType }),
         ...(minPrice && { minPrice }),
         ...(maxPrice && { maxPrice }),
+        approved: true,
     };
     const sort = {
         ...(sortBy && { sortBy }),

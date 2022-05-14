@@ -5,6 +5,7 @@ const roomController = require('../../controllers/roomController');
 const router = new express.Router();
 
 router.post('/approveRoom/:id', auth, roomController.approveRoom);
+router.get('/notApproved', auth, roomController.getNotApprovedRoom);
 
 
 

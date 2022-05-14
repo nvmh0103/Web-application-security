@@ -21,5 +21,8 @@ class roomController {
     approveRoom(req, res){
         admin.room.approveRoom(req, res);
     }
+    getNotApprovedRoom(req, res){
+        admin.room.getNotApprovedRoom(req, res);
+    }
 }
 module.exports = new roomController();

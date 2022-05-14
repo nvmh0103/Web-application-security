@@ -13,5 +13,8 @@ class MediaController {
     deleteMedia(req, res){
         host.media.deleteMedia(req, res);
     }
+    genPresignURL(req, res){
+        host.media.genPresign(req, res);
+    }
 }
 module.exports = new MediaController();

@@ -24,6 +24,7 @@
   "dependencies": {
     "@prisma/client": "^3.11.1",
     "amqplib": "^0.8.0",
+    "aws-sdk": "^2.1135.0",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cookie-session": "^2.0.0",
@@ -35,6 +36,7 @@
     "helmet": "^5.0.2",
     "jsonwebtoken": "^8.5.1",
     "lusca": "^1.7.0",
+    "mime": "^3.0.0",
     "moment": "^2.29.3",
     "moment-range": "^4.0.2",
     "nodemon": "^2.0.15",

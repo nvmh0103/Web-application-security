@@ -8,7 +8,7 @@ const createMedia = async (req, res) => {
     try {
         req.body.room={
             connect:{
-                id: req.body.roomId
+                id: parseInt(req.body.roomId)
             }
         }
         delete req.body.roomId;

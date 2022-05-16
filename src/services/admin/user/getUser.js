@@ -1,4 +1,5 @@
 const {PrismaClient} = require('@prisma/client');
+const pagination = require('../../../utils/pagination')
 const request = require('../../../utils/requests');
 
 
@@ -15,7 +16,7 @@ const getUser = async (req, res) => {
             skip: (page-1) * limit,
             take: parseInt(limit),
             where: {
-                not: {
+                NOT: {
                     role: "Admin",
                 }
             },
@@ -27,14 +28,16 @@ const getUser = async (req, res) => {
             }
         });
         let totalNumber = await prisma.users.count({where: {
-            not: {
+            NOT: {
                 role: "Admin",
             }
         } });
         let {paginationData} = pagination(totalNumber, page, limit);
         return request.getManyRequest(res, "Success", user, paginationData);
     } catch (err){
-        return request.InteralServerError(res,err);
+        return request.InteralServerError(res, err);
     }
+        
+    
 }
 module.exports = getUser;

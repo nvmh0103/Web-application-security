@@ -33,6 +33,7 @@ const getRoom = async (req, res) => {
             where: filter,
             include:{
                 location: true,
+                pictures: true,
             }
         })
         let totalNumber = await prisma.rooms.count({where: filter});

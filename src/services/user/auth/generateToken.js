@@ -3,10 +3,10 @@ const request = require('../../../utils/requests');
 
 const generateToken = (req, res) => {
     try {
-        const {email} = jwt.verifyRefreshToken(req.session.jwtRefresh);
+        const receiveToken= req.header('Authorization').replace('Bearer', '').trim();
+        const {email} = jwt.verifyRefreshToken(receiveToken);
         const token = jwt.signToken({email});
-        req.session.jwtToken = token;
-        return request.okRequest(res,"Success!");
+        return request.okRequest(res,"Success!", {token});
     } catch (err){
         return request.badRequest(res, "Please log in again!");
     }

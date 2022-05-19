@@ -21,11 +21,8 @@ const login = async (req, res) => {
         }
         const token = jwt.signToken({email:user.email});
         const refreshToken = jwt.signRefreshToken({email: user.email}); 
-        req.session = {
-            jwtToken: token,
-            jwtRefresh: refreshToken,
-        }
-        return request.createSuccessRequest(res, "Login successfully");
+
+        return request.okRequest(res, "Login successfully", {token, refreshToken});
 
     } catch (err){
         return request.InteralServerError(res,err);

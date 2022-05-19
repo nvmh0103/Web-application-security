@@ -5,12 +5,9 @@ const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const authForHost = async (req, res, next) => {
-    if (req.session.jwtToken == null){
-        return request.NotAuthorizedError(res);
-    }
     try {
-        const {email} = jwt.verifyToken(req.session.jwtToken);
-        req.email = email;
+        const receiveToken= req.header('Authorization').replace('Bearer', '').trim();
+        const {email} = jwt.verifyToken(receiveToken);
         const user = await prisma.users.findUnique({where: {email}});
         if (user.role != 'Host'){
             return request.NotAuthorizedError(res);

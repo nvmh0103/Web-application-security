@@ -27,6 +27,9 @@ class authController {
     isLoggedIn(req, res){
         user.auth.isLogged(req, res);
     }
+    signout(req, res){
+        user.auth.signout(req, res);
+    }
 }
 
 module.exports = new authController();

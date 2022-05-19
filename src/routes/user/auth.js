@@ -9,6 +9,7 @@ router.post('/login', authController.loginUser);
 router.get('/refresh', authController.generateToken);
 router.get('/checkEmail', authController.checkEmail);
 router.get('/isLoggedIn', authController.isLoggedIn);
+router.get('/signout', authController.signout);
 
 
 module.exports = router;

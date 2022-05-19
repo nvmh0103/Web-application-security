@@ -6,7 +6,26 @@ const request = require('../../../utils/requests');
 const prisma = new PrismaClient()
 
 const getUser = async (req, res) => {
-    try {
+    
+        // filter 
+        const {email} = req.query;
+        let filter = {};
+        if (!email){
+            filter = {
+                NOT: {
+                    role: "Admin",
+                }
+            }
+        } else {
+            filter = {
+                NOT: {
+                    role: "Admin",
+                },
+                email:{
+                    contains: email
+                }
+            }
+        }
         let page = req.query.page;
         if (!page){
             return request.badRequest(res, 'Please provide page');
@@ -15,11 +34,7 @@ const getUser = async (req, res) => {
         const user = await prisma.users.findMany({
             skip: (page-1) * limit,
             take: parseInt(limit),
-            where: {
-                NOT: {
-                    role: "Admin",
-                }
-            },
+            where: filter,
             select:{
                 email: true,
                 name: true,
@@ -34,9 +49,7 @@ const getUser = async (req, res) => {
         } });
         let {paginationData} = pagination(totalNumber, page, limit);
         return request.getManyRequest(res, "Success", user, paginationData);
-    } catch (err){
-        return request.InteralServerError(res, err);
-    }
+  
         
     
 }

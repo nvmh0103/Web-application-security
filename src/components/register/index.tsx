@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import { useMouseWheel } from "react-use";
 import { useForm } from "react-hook-form";
 import { useOnClickOutside } from "usehooks-ts";
-import { Menu } from "@components/menu";
+import { Menu } from "@components/menu/Menu";
+import {API_ENDPOINTS} from "@utils/apiEndpoints";
+import http from "@utils/http"
+import axios from "axios"
+import {toast} from "react-toastify"
 import {
     AppleIcon,
     ColorFacebookIcon,
@@ -15,15 +19,17 @@ import {
     UserIcon,
 } from "@components/icons";
 // import classNames from "classnames";
-import { Hidden } from "@material-ui/core";
+
+import { watch } from "fs";
+import { Loading } from "@nextui-org/react";
 
 type User = {
     username: string;
     password: string;
-    confirmPassword: string;
+    confirmPassword?: string;
     name: string;
     email: String;
-    phone: number;
+    phoneNumber: number;
 };
 
 export const Register: React.FC = () => {
@@ -31,11 +37,56 @@ export const Register: React.FC = () => {
         register,
         handleSubmit,
         formState: { errors },
+        watch,
     } = useForm<User>();
 
-    const onSubmit = handleSubmit((data) => {
-        alert(JSON.stringify(data));
+    const [isLoading, setIsLoading] = useState(false);
+
+    const onSubmit = handleSubmit( async (user) => {
+        setIsLoading(true);
+        delete user.confirmPassword;
+        const response = await axios.post(`https://cc62e73f33af4d5eb355d601efc35466-3afda50d-vm-80.vlab2.uit.edu.vn/api/v1${API_ENDPOINTS.REGISTER}`, user)
+        .then(res => {
+            toast.info("Đăng ký thành công!", {
+                position: "top-right",
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: false,
+                });
+            setIsLoading(false);
+        })
+        .catch(err => {
+            if (err.response.status === 403) { 
+                toast.error("Truy cập bị chặn!", {
+                  position: "top-right",
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: false,
+                  autoClose: 3000,
+                  });
+                 setIsLoading(false); 
+            }
+
+            if (err.response.status === 500) { 
+                toast.error("Đã có lỗi xảy ra, vui lòng liên hệ bộ phận CSKH để được hỗ trợ", {
+                    position: "top-right",
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    autoClose: 3000,
+
+                  });
+                    setIsLoading(false);
+            }
+        });
+        
     });
+
+    const newPassword = useRef({});
+    newPassword.current = watch("password", "");
 
     // const ref = useRef(null);
     // const handleClickOutside = () => {
@@ -77,10 +128,22 @@ export const Register: React.FC = () => {
 
                         <form className="form py-5" onSubmit={onSubmit}>
                             <div className="flex flex-col justify-between ">
-                                <div className="rounded-lg">
+                                {/* <div className="rounded-lg">
                                     <input
                                         {...register("username", {
-                                            required: true,
+                                            required:
+                                                "Tài khoản không được để trống",
+                                            minLength: {
+                                                value: 6,
+                                                message:
+                                                    "Tên tài khoản phải có ít nhất 6 ký tự",
+                                            },
+
+                                            pattern: {
+                                                value: /^[a-zA-Z0-9]+$/,
+                                                message:
+                                                    "Tên tài khoản không được chứa ký tự đặc biệt",
+                                            },
                                         })}
                                         id="username"
                                         name="username"
@@ -90,7 +153,32 @@ export const Register: React.FC = () => {
                                     ></input>
                                     {errors.username && (
                                         <div className="text-red-500 font-medium text-xs my-2">
-                                            Tài khoản không được để trống
+                                            {errors.username.message}
+                                        </div>
+                                    )}
+                                </div> */}
+
+                                <div className="rounded-lg">
+                                    <input
+                                        {...register("email", {
+                                            required:
+                                                "Email không được để trống",
+                                            pattern: {
+                                                value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                                message:
+                                                    "Email không đúng định dạng",
+                                            },
+                                        })}
+                                        required
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        placeholder="Email"
+                                        className=" text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black "
+                                    ></input>
+                                    {errors.email && (
+                                        <div className="text-red-500 font-medium text-xs my-2">
+                                            {errors.email.message}
                                         </div>
                                     )}
                                 </div>
@@ -98,17 +186,29 @@ export const Register: React.FC = () => {
                                 <div className="rounded-lg">
                                     <input
                                         {...register("password", {
-                                            required: true,
+                                            required: "Bạn chưa nhập mật khẩu",
+                                            minLength: {
+                                                value: 8,
+                                                message:
+                                                    "Mật khẩu phải có ít nhất 8 ký tự",
+                                            },
+
+                                            pattern: {
+                                                value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/i,
+                                                message:
+                                                    "Mật khẩu phải có ít nhất 1 kí tự in hoa, 1 kí tự thường, 1 kí tự số và 1 kí tự đặc biệt",
+                                            },
                                         })}
                                         type="password"
                                         id="password"
                                         name="password"
                                         placeholder="Mật khẩu"
+                                        required
                                         className="text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black"
                                     ></input>
                                     {errors.password && (
                                         <div className="text-red-500 font-medium text-xs my-2">
-                                            Bạn chưa nhập mật khẩu
+                                            {errors.password.message}
                                         </div>
                                     )}
                                 </div>
@@ -116,8 +216,13 @@ export const Register: React.FC = () => {
                                 <div className="rounded-lg">
                                     <input
                                         {...register("confirmPassword", {
-                                            required: true,
+                                            required:
+                                                "Bạn chưa nhập mật khẩu xác nhận",
+                                            validate: (value) =>
+                                                value === newPassword.current ||
+                                                "Mật khẩu xác nhận phải giống mật khẩu đặt trước đó",
                                         })}
+                                        required
                                         id="confirmPassword"
                                         name="confirmPassword"
                                         type="password"
@@ -126,7 +231,7 @@ export const Register: React.FC = () => {
                                     ></input>
                                     {errors.confirmPassword && (
                                         <div className="text-red-500 font-medium text-xs my-2">
-                                            Mật khẩu phải trùng với mật khẩu đã nhập
+                                            {errors.confirmPassword.message}
                                         </div>
                                     )}
                                 </div>
@@ -134,7 +239,13 @@ export const Register: React.FC = () => {
                                 <div className="rounded-lg">
                                     <input
                                         {...register("name", {
-                                            required: true,
+                                            required: "Bạn chưa nhập tên",
+
+                                            pattern: {
+                                                value: /^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+)$/i,
+                                                message:
+                                                    "Tên không được chứa ký tự đặc biệt và số",
+                                            },
                                         })}
                                         id="name"
                                         name="name"
@@ -144,56 +255,60 @@ export const Register: React.FC = () => {
                                     ></input>
                                     {errors.name && (
                                         <div className="text-red-500 font-medium text-xs my-2">
-                                            Họ tên không được để trống
+                                            {errors.name.message}
                                         </div>
                                     )}
                                 </div>
 
                                 <div className="rounded-lg">
                                     <input
-                                        {...register("email", {
-                                            required: true,
-                                        })}
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        placeholder="Email"
-                                        className=" text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black "
-                                    ></input>
-                                    {errors.email && (
-                                        <div className="text-red-500 font-medium text-xs my-2">
-                                            Email không được để trống
-                                        </div>
-                                    )}
-                                </div>
+                                        {...register("phoneNumber", {
+                                            required:
+                                                "Số điện thoại không được để trống",
 
-                                <div className="rounded-lg">
-                                    <input
-                                        {...register("phone", {
-                                            required: true,
+                                            pattern: {
+                                                value: /^[0-9]*$/,
+                                                message:
+                                                    "Số điện thoại không đúng định dạng",
+                                            },
+
+                                            maxLength: {
+                                                value: 10,
+                                                message:
+                                                    "Số điện thoại phải có 10 số",
+                                            },
+
+                                            minLength: {
+                                                value: 10,
+                                                message:
+                                                    "Số điện thoại phải có 10 số",
+                                            },
                                         })}
-                                        id="phone"
-                                        name="phone"
+                                        id="phoneNumber"
+                                        name="phoneNumber"
                                         type="tel"
                                         placeholder="Số điện thoại"
                                         className=" text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black "
                                     ></input>
-                                    {errors.phone && (
+                                    {errors.phoneNumber && (
                                         <div className="text-red-500 font-medium text-xs my-2">
-                                            Số điện thoại không được để trống
+                                            {errors.phoneNumber.message}
                                         </div>
                                     )}
                                 </div>
-
                             </div>
 
                             <div>
                                 <button
-                                    type="button"
+                                    type="submit"
                                     className="bg-gradient-to-r from-[#e61e4d] to-[#d70466] w-full rounded-xl py-3 mt-5 text-white active:bg-pink-500 hover:shadow-xl active:scale-90 transition duration-150"
                                     onClick={onSubmit}
                                 >
-                                    Tiếp tục
+                                    {isLoading ? (
+                                        <Loading type="default" color="white" />
+                                    ) : (
+                                        "Tiếp tục"
+                                    )}
                                 </button>
                             </div>
 
@@ -208,8 +323,6 @@ export const Register: React.FC = () => {
                                 </a>
                             </div>
                         </form>
-
-                        
                     </div>
 
                     <div className="flex items-center">

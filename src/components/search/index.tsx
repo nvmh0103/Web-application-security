@@ -1,11 +1,16 @@
 import React, { useRef } from "react";
-import { SearchIcon, UsersIcon } from "@heroicons/react/solid";
+import {
+    MinusSmIcon,
+    PlusSmIcon,
+    SearchIcon,
+    UsersIcon,
+} from "@heroicons/react/solid";
 import { Logo } from "@components";
 import { Button } from "@components/button";
 import { AirbnbIcon, GlobeIcon, MenuIcon, UserIcon } from "@components/icons";
 import { useState } from "react";
 import { TextField } from "@material-ui/core";
-import { Menu } from "@components/menu";
+import { Menu } from "@components/menu/Menu";
 import { Router } from "next/router";
 import { useRouter } from "next/router";
 
@@ -36,7 +41,10 @@ export const Search: React.FC<Props> = ({
     const [openDay, setOpenDay] = useState(false);
 
     const [openGuests, setOpenGuests] = useState(false);
-    const [guests, setGuests] = useState(1);
+    const [adults, setAdults] = useState(1);
+    const [children, setChildren] = useState(0);
+
+    const guests = adults + children;
     // const [startDate, setStartDate] = useState(new Date());
     // const [endDate, setEndDate] = useState(new Date());
 
@@ -121,7 +129,14 @@ export const Search: React.FC<Props> = ({
 
                 <div className=" border-l border-gray-500 relative">
                     <div className="hover:bg-gray-500 rounded-40 flex">
-                        <div className=" cursor-pointer  lg:px-5 lg:py-1 flex pl-4 ">
+                        <div
+                            className=" cursor-pointer  lg:px-5 lg:py-1 flex pl-4 "
+                            onClick={() => {
+                                openGuests
+                                    ? setOpenGuests(false)
+                                    : setOpenGuests(true);
+                            }}
+                        >
                             <div className="hidden lg:inline-block">
                                 <p className="m-0">Khách</p>
                                 <p>{guests} người</p>
@@ -134,14 +149,12 @@ export const Search: React.FC<Props> = ({
                                     Router.push({
                                         pathname: "/search",
                                         query: {
-                                            
-                                                location: searchInput,
-                                                startDate:
-                                                    pickDay[0].startDate.toISOString(),
-                                                endDate:
-                                                    pickDay[0].endDate.toISOString(),
-                                                guests: guests,
-                                        
+                                            location: searchInput,
+                                            startDate:
+                                                pickDay[0].startDate.toISOString(),
+                                            endDate:
+                                                pickDay[0].endDate.toISOString(),
+                                            guests: guests,
                                         },
                                     });
                                 }}
@@ -169,18 +182,18 @@ export const Search: React.FC<Props> = ({
                         endDate={pickDay[0].endDate}
                     />
 
-                    <div className="flex items-center border-b mb-3 w-[58%] bg-white">
+                    {/* <div className="flex items-center border-b mb-3 w-[58%] bg-white">
                         <h2 className="flex-grow ">Số lượng khách:</h2>
 
-                        <UsersIcon className="h-5" />
+                        <UsersIcon className="h-5 mr-2" />
                         <input
                             value={guests}
                             onChange={(e) => setGuests(Number(e.target.value))}
                             type="number"
-                            className="text-lg outline-none text-red-500"
+                            className="text-lg outline-none text-red-500 w-8"
                             min={1}
                         />
-                    </div>
+                    </div> */}
 
                     <div className="flex space-x-20">
                         <button
@@ -213,7 +226,65 @@ export const Search: React.FC<Props> = ({
             )}
 
             {openGuests && (
-                <div className="left-[50%] translate-x-[-50%] flex absolute "></div>
+                <div className="flex flex-col space-y-6 p-4 border-t border-gray-300 shadow-product rounded-xl ml-[60%] mr-[20%] bg-white">
+                    <div className="flex justify-between ">
+                        <div className="">
+                            <h2 className="text-black"> Người lớn </h2>
+                            <p className="">Từ 13 tuổi trở lên</p>
+                        </div>
+
+                        <div className="flex items-center">
+                            <PlusSmIcon
+                                className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
+                                onClick={() => {
+                                    setAdults(adults + 1);
+                                }}
+                            />
+                            <div className="text-black text-xl mx-4">
+                                {adults}
+                            </div>
+                            <MinusSmIcon
+                                className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
+                                onClick={() => {
+                                    setAdults(adults - 1);
+
+                                    adults <= 1
+                                        ? setAdults(1)
+                                        : setAdults(adults - 1);
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex justify-between">
+                        <div className="">
+                            <h2 className="text-black"> Trẻ em </h2>
+                            <p className="">Từ 13 tuổi trở xuống</p>
+                        </div>
+
+                        <div className="flex items-center">
+                            <PlusSmIcon
+                                className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
+                                onClick={() => {
+                                    setChildren(children + 1);
+                                }}
+                            />
+                            <div className="text-black text-xl mx-4">
+                                {children}
+                            </div>
+                            <MinusSmIcon
+                                className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
+                                onClick={() => {
+                                    setChildren(children - 1);
+
+                                    children <= 0
+                                        ? setChildren(0)
+                                        : setChildren(children - 1);
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );

@@ -5,8 +5,11 @@ import { Button } from "@components/button";
 import { AirbnbIcon, GlobeIcon, MenuIcon, UserIcon } from "@components/icons";
 import { useState } from "react";
 import { TextField } from "@material-ui/core";
-import { Menu } from "@components/menu";
+import { Menu } from "@components/menu/Menu";
+import { MenuUser } from "@components/menu/MenuUser";
+import { getCookie } from "cookies-next";
 import Search from "@components/search";
+
 
 export const LoginHeader: React.FC = () => {
     const [state, setState] = useState("");
@@ -17,11 +20,13 @@ export const LoginHeader: React.FC = () => {
         setState(event.target.value);
     };
 
+    const value = getCookie("isLoggedIn");
+
     return (
         <div className="sticky top-0 z-10">
-            <div className=" grid grid-cols-2 bg-white shadow-md py-3 px-20 border-b border-gray-300">
-                <div className=" flex items-center h-10 cursor-pointer my-auto ">
-                    <a className="" href="/">
+            <div className=" grid grid-cols-2 bg-white shadow-md py-3 md:px-20 px-10 border-b border-gray-300">
+                <div className=" flex items-center h-10  my-auto ">
+                    <a className="cursor-pointer" href="/">
                         <AirbnbIcon />
                     </a>
                 </div>
@@ -56,7 +61,14 @@ export const LoginHeader: React.FC = () => {
                                     <UserIcon className="h-6" />
                                 </Button>
 
-                                {stateMenu && <Menu />}
+                                {!value && (
+                                stateMenu && <Menu />
+                                )}
+
+                                {value && (
+                                stateMenu && <MenuUser />
+                                )}
+
                             </div>
                         </div>
                     </div>

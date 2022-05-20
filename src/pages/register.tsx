@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useMouseWheel } from "react-use";
 import { useForm } from "react-hook-form";
 import { useOnClickOutside } from "usehooks-ts";
-import { Menu } from "@components/menu";
+import { Menu } from "@components/menu/Menu";
 import {
     AppleIcon,
     ColorFacebookIcon,

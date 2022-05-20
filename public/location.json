@@ -5,25 +5,25 @@
             "img": "https://a0.muscache.com/im/pictures/03bb6d0a-5ccb-47e1-83fc-b7ad87e7f8c3.jpg?im_w=320",
             "location": "Thành phố Vinh",
             "distance": "Cách 262km",
-            "style": "bg-black rounded-b-xl pt-6 px-4 pb-8 h-218"
+            "style": "firstCard rounded-b-xl pt-6 px-4 pb-8 h-218 roundedCard"
         },
         {
             "img": "https://a0.muscache.com/im/pictures/ffde0c4b-1889-4d11-bb00-41411d34fdfc.jpg?im_w=320",
             "location": "Hà Nội",
             "distance": "Cách 2km",
-            "style": "bg-black rounded-b-xl pt-6 px-4 pb-8 h-218"
+            "style": "secondCard rounded-b-xl pt-6 px-4 pb-8 h-218 roundedCard"
         },
         {
             "img": "https://a0.muscache.com/im/pictures/0538dab4-a0fc-4035-b6b2-40fa3532ee7b.jpg?im_w=320",
             "location": "Thành phố Hạ Long",
             "distance": "Cách 125km",
-            "style": "bg-black rounded-b-xl pt-6 px-4 pb-8 h-218"
+            "style": "thirdCard rounded-b-xl pt-6 px-4 pb-8 h-218 roundedCard"
         },
         {
             "img": "https://a0.muscache.com/im/pictures/3a7b8005-28b8-48b8-8efa-0a6a00f7d5d8.jpg?im_w=320",
             "location": "Mỹ Đình",
             "distance": "Cách 8km",
-            "style": "bg-black rounded-b-xl pt-6 px-4 pb-8 h-218"
+            "style": "fourthCard rounded-b-xl pt-6 px-4 pb-8 h-218 roundedCard"
         }
     ]
 }

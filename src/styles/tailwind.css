@@ -1720,9 +1720,33 @@ video {
     transition: transform 0.25s ease-out;
 }
 
+.h-218 {
+    height: 218px;
+}
 
 .firstCard {
 	background-color: #d93b30;
+}
+
+/* 'secondCard': '#cc2d4a',
+                'thirdCard': '#d93b30',
+                'fourthCard': '#de3151', */
+
+.secondCard {
+    background-color: #cc2d4a;
+}
+
+.thirdCard {
+    background-color: #d93b30;
+}
+
+.fourthCard {
+    background-color: #de3151;
+}
+
+.roundedCard {
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
 }
 
 #hoverToChange:hover ~ #changeBackground {
@@ -1752,4 +1776,23 @@ video {
 .rdrDateRangePickerWrapper {
     display: flex !important;
     justify-content: space-between;
+}
+
+input[type=radio]:checked ~ .check {
+    border: 5px solid #000000;
+  }
+  
+  input[type=radio]:checked ~ .check::before{
+    background: #000000;
+  }
+  
+  input[type=radio]:checked ~ label{
+    color: #ffffff;
+  }
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -250px;
+    visibility: hidden;
 }

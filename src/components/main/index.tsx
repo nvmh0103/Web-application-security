@@ -27,11 +27,11 @@ export const Main: React.FC = () => {
                         className="object-cover rounded-2xl "
                     />
 
-                    <div className="absolute top-32 left-12 text-white">
-                        <h2 className="text-5xl mb-3  2xl:w-[373px] leading-[60px]">
+                    <div className="absolute xl:top-32 xl:left-12 top-10 left-6 text-white">
+                        <h2 className="xl:text-5xl md:text-4xl text-2xl mb-3  2xl:w-[373px] md:leading-[60px]">
                             Những điều nên trải nghiệm trong chuyến đi của bạn
                         </h2>
-                        <button className="text-black bg-white px-6 py-4 mt-5 rounded-lg hover:bg-gray-300 leading-5 text-base">
+                        <button className="text-black bg-white font-semibold px-6 py-4 md:mt-5 mt-3 rounded-lg hover:bg-gray-300 leading-5 text-base">
                             Trải nghiệm
                         </button>
                     </div>
@@ -44,11 +44,11 @@ export const Main: React.FC = () => {
                         className="object-cover rounded-2xl"
                     />
 
-                    <div className="absolute top-32 left-12 text-white">
-                        <h2 className="text-5xl mb-3  2xl:w-[442px] leading-[60px]">
+                    <div className="absolute xl:top-32 xl:left-12 top-10 left-6 text-white">
+                        <h2 className="xl:text-5xl md:text-4xl text-2xl mb-3  2xl:w-[442px] md:leading-[60px]">
                             Những điều nên trải nghiệm tại nhà
                         </h2>
-                        <button className="text-black bg-white px-6 py-4 mt-5 rounded-lg hover:bg-gray-300 leading-5 text-base">
+                        <button className="text-black bg-white px-6 py-4 md:mt-5  rounded-lg hover:bg-gray-300 leading-5 font-semibold  text-base">
                             Trải nghiệm trực tuyến
                         </button>
                     </div>
@@ -64,15 +64,15 @@ export const Main: React.FC = () => {
                         className="w-full object-cover rounded-2xl"
                     />
 
-                    <div className="absolute 2xl:top-32 2xl:left-12 top-16 left-6">
-                        <h1 className="2xl:text-[95px] xl:text-[95px] mb-3 text-white 2xl:leading-[105px] xl:leading-[105px] text-[43px] leading-[47px]">
-                            Bạn có thắc mắc 
-                            <br></br>
-                            về việc 
-                            <br></br> 
+                    <div className="absolute 2xl:top-32 2xl:left-12 md:top-20 md:left-8 top-12 left-6">
+                        <h1 className=" xl:text-[95px] md:text-4xl mb-3 text-white 2xl:leading-[105px] xl:leading-[105px] text-2xl md:leading-[47px]">
+                            {"Bạn có thắc mắc "} 
+                            <br className="hidden sm:block"></br>
+                             {"về việc "} 
+                            <br className="hidden sm:block"></br> 
                             đón tiếp khách?
                         </h1>
-                        <button className="text-sm text-black bg-white rounded-lg mt-5 px-4 py-2 hover:bg-gray-300">
+                        <button className="text-sm font-semibold  text-black bg-white rounded-lg md:mt-5 px-3 py-3 hover:bg-gray-300">
                             Hỏi ý kiến Chủ nhà siêu cấp
                         </button>
                     </div>

@@ -30,12 +30,13 @@ const localeSubpaths = {
 // });
 
 const config = {
-    // webpack5: true,
-    // webpack: (config) => {
-    //     config.resolve.fallback = { fs: false };
+    // reactStrictMode: false,
+    webpack5: true,
+    webpack: (config) => {
+        config.resolve.fallback = { fs: false };
 
-    //     return config;
-    // },
+        return config;
+    },
     devServer: {
         proxy: {
             "/api": "http://localhost:3000",
@@ -88,19 +89,18 @@ const config = {
     images: {
         domains: [
             "assets.vercel.com",
-            "old.joolux.com",
             "images.ctfassets.net",
-            "joolux.com",
-            "joolux-client.ml",
             "i.imgur.com",
             "usercontent.funipos.net",
             "a0.muscache.com",
+            "events.mapbox.com",
+            "media.discordapp.net",
         ],
     },
 
     env: {
         mapbox_key:
-            "pk.eyJ1IjoiY210Y2t1b25nMTIzIiwiYSI6ImNsMmxhM2pwZjA3NHMzanBucjBxeHdrMTAifQ.8B_9ISDm1EvwvhD7j0pUcg",
+            "pk.eyJ1IjoiY210Y2t1b25nMTIzIiwiYSI6ImNsMnZzMGh3YjBlbjAzbHFtZWE5YnBnMnoifQ.FPz4FN_pEvJ7jn0OQNG_ow",
     },
 };
 

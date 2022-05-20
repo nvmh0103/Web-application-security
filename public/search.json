@@ -8,7 +8,7 @@
             "description": "4 khách · 2 phòng ngủ · 1 giường · 2 phòng tắm · Wi-fi · Nhà bếp · Chỗ đỗ xe miễn phí · Máy giặt",
             "star": 4.73,
             "rate": 325,
-            "price": "$15",
+            "price": 15,
             "long": -0.0022275,
             "lat": 51.5421655,
             "id": "xsxv758135"
@@ -20,7 +20,7 @@
             "description": "4 khách · 2 phòng ngủ · 2 giường · 1 phòng tắm · Wi-fi · Bếp",
             "star": 4.3,
             "rate": 217,
-            "price": "$40",
+            "price": 40,
             "long": -0.095091,
             "lat": 51.48695,
             "id": "tfgr146682"
@@ -32,7 +32,7 @@
             "description": "16 khách · 4 phòng ngủ · 6 giường · 6 phòng tắm · Chỗ đỗ xe miễn phí · Máy giặt",
             "star": 3.8,
             "rate": 467,
-            "price": "$98",
+            "price": 98,
             "long": -0.135638,
             "lat": 51.521916,
             "id": "ssgh125879"
@@ -44,7 +44,7 @@
             "description": "2 khách · 1 studio · 1 giường · 1 phòng tắm riêng · Wi-fi · Nhà bếp · Chỗ đỗ xe miễn phí · Máy giặt",
             "star": 4.1,
             "rate": 314,
-            "price": "$55",
+            "price": 55,
             "long": -0.069961,
             "lat": 51.472618,
             "id": "lmvh513586"
@@ -56,7 +56,7 @@
             "description": "2 khách · 1 phòng ngủ · 1 giường ",
             "star": 5.0,
             "rate": 81,
-            "price": "$60",
+            "price": 60,
             "long": -0.08472,
             "lat": 51.510794,
             "id": "lopo147842"
@@ -68,7 +68,7 @@
             "description": "2 guests · 1 bedroom · 1 bed · 1.5 shared bathrooms · Wifi · Washing Machine",
             "star": 4.23,
             "rate": 198,
-            "price": "$19",
+            "price": 19,
             "long": -0.094116,
             "lat": 51.51401,
             "id": "iyth144785"
@@ -80,7 +80,7 @@
             "description": "3 guests · 1 bedroom · 1 bed · 1.5 shared bathrooms · Wifi · Kitchen · Free parking · Washing Machine",
             "star": 3.85,
             "rate": 256,
-            "price": "$90",
+            "price": 90,
             "long": -0.109889,
             "lat": 51.521245,
             "id": "ccge412487"

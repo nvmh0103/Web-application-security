@@ -5,22 +5,20 @@ import { Button } from "@components/button";
 import { AirbnbIcon, GlobeIcon, MenuIcon, UserIcon } from "@components/icons";
 import { useState } from "react";
 import { TextField } from "@material-ui/core";
-import { Menu } from "@components/menu";
+import { Menu } from "@components/menu/Menu";
 import Search from "@components/search";
-
+import { MenuUser } from "@components/menu/MenuUser";
+import { getCookie } from "cookies-next";
 
 interface Props {
     title?: string;
     place?: string;
-    
 }
 
 export const StickyHeader: React.FC<Props> = ({
-    title = "Bắt đầu tìm kiếm",  
+    title = "Bắt đầu tìm kiếm",
     place = "Bạn sắp đi đâu?",
 }) => {
- 
-
     const [state, setState] = useState("");
     const [stateMenu, setStateMenu] = useState(false);
     const [stateSearch, setStateSearch] = useState(false);
@@ -29,33 +27,35 @@ export const StickyHeader: React.FC<Props> = ({
         setState(event.target.value);
     };
 
+    const value = getCookie("isLoggedIn");
+
     return (
         <div className="sticky top-0 z-10">
-            <div className=" grid grid-cols-3 bg-white shadow-md py-3 px-20">
+            <div className=" grid grid-cols-3 bg-white shadow-md py-3 lg:px-20 px-10">
                 <div className=" flex items-center h-10 cursor-pointer my-auto ">
                     <a className="" href="/">
                         <AirbnbIcon />
                     </a>
                 </div>
 
-                <div className="items-center  px-5 flex justify-center ">
+                <div className="items-center px-5 justify-center md:flex hidden">
                     <Button
                         type="button"
                         className="text-left"
                         onClick={() => {
-                            stateSearch ? setStateSearch(false) : setStateSearch(true);
+                            stateSearch
+                                ? setStateSearch(false)
+                                : setStateSearch(true);
                         }}
                     >
                         <div className="px-4 flex md:justify-between items-center justify-center">
-                            <p className="hidden md:inline-flex">
-                                {title}
-                            </p>
+                            <p className="hidden md:inline-flex">{title}</p>
                             <SearchIcon className="h-8 bg-red-500 text-white rounded-full cursor-pointer p-2 md:mx-2 " />
                         </div>
                     </Button>
                 </div>
 
-                <div className="flex items-center space-x-4 justify-end ">
+                <div className="flex items-center space-x-4 justify-end col-span-2 md:col-span-1">
                     <div className="relative flex items-center">
                         <a
                             className="p-3 rounded-22 hover:bg-gray-100 hidden md:inline"
@@ -84,14 +84,15 @@ export const StickyHeader: React.FC<Props> = ({
                                 <UserIcon className="h-6" />
                             </Button>
 
-                            {stateMenu && <Menu />}
+                            {!value && stateMenu && <Menu />}
+
+                            {value && stateMenu && <MenuUser />}
                         </div>
                     </div>
                 </div>
             </div>
 
-            {stateSearch && <Search 
-            place={place}/>}
+            {stateSearch && <Search place={place} />}
         </div>
     );
 };

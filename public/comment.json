@@ -1,0 +1,47 @@
+{
+    "name": "RoomComment",
+    "item": [
+        {
+            "img": "https://media.discordapp.net/attachments/890493745982767111/976818815767805952/Capture_4.JPG",
+            "name": "Chủ quán Cafe Vối",
+            "date": "Tháng 4 năm 2022",
+            "comment": "Đây là một nơi tuyệt vời với tầm nhìn tuyệt vời ra quán cafe của tôi, tôi không thể tưởng tượng ra một nơi nào tốt hơn để ở!"
+        },
+        {
+            
+            "img": "https://media.discordapp.net/attachments/795114479133786135/976689254505775135/IMG_20220519_103349.jpg?width=565&height=663",
+            "name": "Nhân viên Zalo",
+            "date": "Tháng 1 năm 2022",
+            "comment": "Tôi đã ở 4 đêm trong ngôi nhà này. Mọi chuyện diễn ra rất tốt đẹp. Nó rất đẹp và tầm nhìn tuyệt vời."
+        },
+        {
+            
+            "img": "https://media.discordapp.net/attachments/795114479133786135/975709610692460564/IMG_6916.jpg?width=884&height=663",
+            "name": "Nhân viên NAB",
+            "date": "Tháng 11 năm 2021",
+            "comment": "Chắc chắn là 5/5 sao. Chỗ này vô cùng rộng rãi và còn thoáng mát hơn công ty của chúng tôi"
+        },
+        {
+           
+            "img": "https://media.discordapp.net/attachments/890493745982767111/976819122971226162/BGBOxj.png",
+            "name": "Chủ web bán xi măng",
+            "date": "Tháng 5 năm 2022",
+            "comment": "Nơi ở chất lượng, như xi măng mà tôi bán"
+        },
+        {
+           
+            "img": "https://media.discordapp.net/attachments/890493745982767111/976820005842853948/hahaMK.JPG",
+            "name": "Thành viên ZaloPay",
+            "date": "Tháng 2 năm 2022",
+            "comment": "Tôi cũng đã ở 4 đêm trong ngôi nhà này. Mọi chuyện diễn ra rất tốt đẹp. Nó rất đẹp và tầm nhìn thì tuyệt vời."
+        },
+        {
+           
+            "img": "https://media.discordapp.net/attachments/890493745982767111/976821310158168105/1972494_581271121941470_1917837907_n.jpg?width=497&height=662",
+            "name": "Cậu bé kì nào cũng có học bổng",
+            "date": "Tháng 10 năm 2021",
+            "comment": "Một nơi ở tuyệt vời! Sẽ ghé đây thường xuyên như cách tôi lấy học bổng mỗi kì"
+        }
+        
+    ]
+}

@@ -39,7 +39,7 @@ const Room: React.FC = () => {
 
             
 
-            <StickyHeader title="Bắt đầu tìm kiếm" place="Bạn muốn đi đâu" />
+           <div> <StickyHeader title="Bắt đầu tìm kiếm" place="Bạn muốn đi đâu" /> </div> 
 
             
 

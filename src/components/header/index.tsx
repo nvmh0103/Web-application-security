@@ -31,7 +31,7 @@ export const Header: React.FC = () => {
 
      
             {scrolled ? <StickyHeader /> : <HomeHeader 
-            className="transition"/>}
+            className="transition ease-in duration-200"/>}
         
 
 

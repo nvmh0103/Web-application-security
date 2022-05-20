@@ -9,23 +9,27 @@ import router, { Router } from "next/router";
 import { useEffect, useState } from "react";
 import { useMouseWheel } from "react-use";
 import { useRouter } from "next/router";
-import { useOnClickOutside} from "usehooks-ts";
+import { useOnClickOutside } from "usehooks-ts";
 
 import cors from "cors";
 
-function Redirect({to}) {
-    useEffect(() => {
-        router.push(to);
-    }, [to]);
-    return null;
-}
+// function Redirect({to}) {
+//     useEffect(() => {
+//         router.push(to);
+//     }, [to]);
+//     return null;
+// }
+
+import { ToastContainer } from "react-toastify";
+
 
 const Home: React.FC = () => {
-
     const [isOpen, setIsOpen] = useState(false);
 
     // const router = useRouter();
     // return <Redirect to="" />;
+
+   
 
     return (
         <Container>
@@ -41,15 +45,22 @@ const Home: React.FC = () => {
                 ></link>
             </Head>
 
-            
+            <ToastContainer
+                toastClassName=
+                    " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer"
+                
+                bodyClassName={() => "text-sm font-white font-med block p-3"}
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={true}
+            />
 
             <Header />
 
-            
             <Banner />
 
-            <Main/>
-               
+            <Main />
+
             <Footer />
         </Container>
     );

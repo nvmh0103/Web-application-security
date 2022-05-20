@@ -103,10 +103,10 @@ const Search: React.FC = () => {
                     </div>
                 </section>
 
-                <section className="flex ">
+                <section className="md:flex ">
                     {/* {data?.data.map(
                         (items: any) => ( */}
-                    <div className="xl:w-3/5  ">
+                    <div className="xl:w-3/5 ">
                         <hr className="text-gray-300 "></hr>
                         <div className="px-4">
                             <p className="my-4 text-sm">
@@ -128,6 +128,8 @@ const Search: React.FC = () => {
                             </p>
 
                             <InfoCards
+                            
+                            
                             // key={items.key}
                             // img={items.img}
                             // location={items.location}
@@ -171,7 +173,7 @@ const Search: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="hidden xl:flex-grow xl:inline-flex lg:w-2/5  max-h-[600px] sticky top-[15%]">
+                    <div className="hidden lg:flex-grow lg:inline-flex lg:w-2/5  max-h-[600px] sticky top-[15%]">
                         <Map />
                     </div>
                 </section>

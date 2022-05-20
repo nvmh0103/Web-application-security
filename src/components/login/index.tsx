@@ -1,11 +1,11 @@
 import React, { useRef, RefObject } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useMouseWheel } from "react-use";
 import { useForm } from "react-hook-form";
 import { useOnClickOutside } from "usehooks-ts";
-import { Menu } from "@components/menu";
+import { Menu } from "@components/menu/Menu";
 import {
     AppleIcon,
     ColorFacebookIcon,
@@ -16,11 +16,18 @@ import {
 } from "@components/icons";
 // import classNames from "classnames";
 import { Hidden } from "@material-ui/core";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { API_ENDPOINTS } from "@utils/apiEndpoints";
+import { Loading } from "@nextui-org/react";
+import { redirect } from "next/dist/server/api-utils";
+import { DeviceMobileIcon, PhoneIcon } from "@heroicons/react/outline";
+import { setCookies } from "cookies-next";
 
 type User = {
-    username: string;
     password: string;
     email: String;
+    phoneNumber: String;
 };
 
 export const Login: React.FC = () => {
@@ -30,8 +37,73 @@ export const Login: React.FC = () => {
         formState: { errors },
     } = useForm<User>();
 
-    const onSubmit = handleSubmit((data) => {
-        alert(JSON.stringify(data));
+    const router = useRouter();
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const onSubmit = handleSubmit(async (user) => {
+        setIsLoading(true);
+        const response = await axios
+            .post(
+                `https://cc62e73f33af4d5eb355d601efc35466-3afda50d-vm-80.vlab2.uit.edu.vn/api/v1${API_ENDPOINTS.LOGIN}`,
+                user,
+            )
+            .then((res) => {
+                toast.info("Đăng nhập thành công", {
+                    position: "top-right",
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    autoClose: 3000,
+                });
+
+                setCookies("isLoggedIn", true);
+                router.push("/");
+                setIsLoading(false);
+                
+            })
+            .catch((err) => {
+                if (err.response.status === 400) {
+                    toast.error("Tài khoản hoặc mật khẩu không đúng", {
+                        position: "top-right",
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: false,
+                        autoClose: 3000,
+                    });
+
+                    setIsLoading(false);
+                }
+
+                if (err.response.status === 403) {
+                    toast.error("Forbidden", {
+                        position: "top-right",
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: false,
+                        autoClose: 3000,
+                    });
+                    setIsLoading(false);
+                }
+
+                if (err.response.status === 500) {
+                    toast.error(
+                        "Đã có lỗi xảy ra, vui lòng liên hệ bộ phận CSKH để được hỗ trợ",
+                        {
+                            position: "top-right",
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: false,
+                            autoClose: 3000,
+                        },
+                    );
+                    setIsLoading(false);
+                }
+            });
     });
 
     // const ref = useRef(null);
@@ -77,7 +149,7 @@ export const Login: React.FC = () => {
                         <form className="form py-5" onSubmit={onSubmit}>
                             {isLogin && (
                                 <div className="flex flex-col justify-between ">
-                                    <div className="rounded-lg">
+                                    {/* <div className="rounded-lg">
                                         <input
                                             {...register("username", {
                                                 required: true,
@@ -91,6 +163,31 @@ export const Login: React.FC = () => {
                                         {errors.username && (
                                             <div className="text-red-500 font-medium text-xs my-2">
                                                 Tài khoản không được để trống
+                                            </div>
+                                        )}
+                                    </div> */}
+
+                                    <div className="rounded-lg">
+                                        <input
+                                            {...register("email", {
+                                                required:
+                                                    "Email không được để trống",
+
+                                                pattern: {
+                                                    value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                                    message:
+                                                        "Email không đúng định dạng",
+                                                },
+                                            })}
+                                            id="email"
+                                            name="email"
+                                            type="text"
+                                            placeholder="Email"
+                                            className=" text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black "
+                                        ></input>
+                                        {errors.email && (
+                                            <div className="text-red-500 font-medium text-xs my-2">
+                                                {errors.email.message}
                                             </div>
                                         )}
                                     </div>
@@ -118,18 +215,25 @@ export const Login: React.FC = () => {
                             {!isLogin && (
                                 <div className="rounded-lg">
                                     <input
-                                        {...register("email", {
-                                            required: true,
+                                        {...register("phoneNumber", {
+                                            required:
+                                                "Bạn chưa nhập số điện thoại",
+
+                                            pattern: {
+                                                value: /^[0-9]{10}$/,
+                                                message:
+                                                    "Số điện thoại chỉ chứa số và có 10 ký tự",
+                                            },
                                         })}
-                                        id="email"
-                                        name="email"
                                         type="text"
-                                        placeholder="Email"
-                                        className=" text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black "
+                                        id="phoneNumber"
+                                        name="phoneNumber"
+                                        placeholder="Số điện thoại"
+                                        className="text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black"
                                     ></input>
-                                    {errors.email && (
+                                    {errors.phoneNumber && (
                                         <div className="text-red-500 font-medium text-xs my-2">
-                                            Email không được để trống
+                                            {errors.phoneNumber.message}
                                         </div>
                                     )}
                                 </div>
@@ -141,7 +245,11 @@ export const Login: React.FC = () => {
                                     className="bg-gradient-to-r from-[#e61e4d] to-[#d70466] w-full rounded-xl py-3 mt-5 text-white active:bg-pink-500 hover:shadow-xl active:scale-90 transition duration-150 font-medium"
                                     onClick={onSubmit}
                                 >
-                                    Tiếp tục
+                                    {isLoading ? (
+                                        <Loading type="default" color="white" />
+                                    ) : (
+                                        "Tiếp tục"
+                                    )}
                                 </button>
                             </div>
 
@@ -201,8 +309,10 @@ export const Login: React.FC = () => {
                                     }
                                 }}
                             >
-                                <MailIcon />
-                                <div className="flex-1">Tiếp tục với Email</div>
+                                <DeviceMobileIcon className="w-6 h-6 " />
+                                <div className="flex-1">
+                                    Tiếp tục với Số điện thoại
+                                </div>
                             </button>
                         )}
 
@@ -216,10 +326,8 @@ export const Login: React.FC = () => {
                                     }
                                 }}
                             >
-                                <UserIcon />
-                                <div className="flex-1">
-                                    Tiếp tục với Tài khoản
-                                </div>
+                                <MailIcon />
+                                <div className="flex-1">Tiếp tục với Email</div>
                             </button>
                         )}
                     </div>

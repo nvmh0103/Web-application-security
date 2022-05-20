@@ -19,3 +19,7 @@ export {default as AppleIcon} from "./AppleIcon";
 export {default as MailIcon} from "./MailIcon";
 export {default as FilterIcon} from "./FilterIcon";
 export {default as ArrowDown} from "./ArrowDown";
+export {default as AirbnbPrivacy} from "./AirbnbPrivacy";
+export {default as VerifyIcon} from "./VerifyIcon";
+export {default as PaypalIcon} from "./PaypalIcon";
+export {default as GooglePayIcon} from "./GooglePayIcon";

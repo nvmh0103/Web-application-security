@@ -7,6 +7,9 @@ import { AirbnbIcon, GlobeIcon, MenuIcon, UserIcon } from "@components/icons";
 import { useMouseWheel } from "react-use";
 import { useEffect, useState } from "react";
 import Search from "@components/search";
+import Menu from "@components/menu/Menu";
+import { MenuUser } from "@components/menu/MenuUser";
+import { getCookie } from "cookies-next";
 
 interface Props {
     className?: string;
@@ -16,24 +19,26 @@ interface Props {
 
 export const HomeHeader: React.FC<Props> = ({
     className = "",
-    title = "Bắt đầu tìm kiếm",  
+    title = "Bắt đầu tìm kiếm",
     place = "Bạn sắp đi đâu?",
-    
 }) => {
-
     const [state, setState] = useState("");
     const [stateMenu, setStateMenu] = useState(false);
     const [stateSearch, setStateSearch] = useState(false);
+
+    
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState(event.target.value);
     };
 
+    const value = getCookie("isLoggedIn");
+
     return (
         <div className={className}>
-            <div className="text-center bg-black grid md:grid-cols-3 grid-cols-2 px-20 py-3 items-center justify-between ">
+            <div className="text-center bg-black grid md:grid-cols-3 grid-cols-2 lg:px-20 px-10 py-3 items-center justify-between ">
                 <div className="flex items-center h-10 cursor-pointer my-auto ">
-                    <a className="" href="#">
+                    <a className="" href="/">
                         <AirbnbIcon color="white" />
                     </a>
                 </div>
@@ -43,7 +48,9 @@ export const HomeHeader: React.FC<Props> = ({
                         Nơi ở
                     </a>
 
-                    <a className="inline-block relative justify-center items-center hover:border-b border-white transition duration-200 ease-out">Trải nghiệm</a>
+                    <a className="inline-block relative justify-center items-center hover:border-b border-white transition duration-200 ease-out">
+                        Trải nghiệm
+                    </a>
 
                     <div className="items-center text-white inline-block relative justify-center hover:border-b border-white transition duration-200 ease-out">
                         <a>Trải nghiệm trực tuyến</a>
@@ -65,23 +72,31 @@ export const HomeHeader: React.FC<Props> = ({
                             <GlobeIcon color="white" />
                         </a>
 
-                        <Button
-                            variant="flat"
-                            className="border-gray-500 border hover:shadow-cart p-2 flex items-center space-x-3 rounded-full transition duration-150 "
-                            onClick={() => {}}
-                        >
-                            <MenuIcon className="h-6" />
-                            <UserIcon className="h-6" />
-                        </Button>
+                        <div className="block text-left">
+                            <Button
+                                variant="flat"
+                                className="border-gray-500 border hover:shadow-cart p-2 flex items-center space-x-3 rounded-full transition duration-150 hover:opacity-100 "
+                                onClick={() => {
+                                    stateMenu
+                                        ? setStateMenu(false)
+                                        : setStateMenu(true);
+                                }}
+                            >
+                                <MenuIcon className="h-6" />
+                                <UserIcon className="h-6" />
+                            </Button>
+
+                            {!value && stateMenu && <Menu />}
+
+                            {value && stateMenu && <MenuUser />}
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div className="pb-8 bg-black">
-                   <Search className="pb-8 bg-black"/>
+                <Search className="pb-8 bg-black" />
             </div>
-            
-
         </div>
     );
 };

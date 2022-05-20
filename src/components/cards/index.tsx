@@ -4,7 +4,7 @@ import data from "@public/location.json";
 
 export const Cards: React.FC = () => {
     return (
-        <div className="flex-1 container my-4 ">
+        <div className="flex-1 my-4 ">
             <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 w-full ">
                 {(data?.item ?? []).map((item) => (
                     <div

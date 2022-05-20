@@ -39,6 +39,9 @@ import "@styles/global.css"
 import { getDirection } from "@utils/get-direction";
 // import ScrollToTop from "@components/common/scroll-to-top";
 
+// 1. import `NextUIProvider` component
+import { NextUIProvider } from '@nextui-org/react';
+
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
 function handleExitComplete() {
@@ -91,10 +94,12 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                                             speed: 400,
                                         }}
                                     />
+                                    <NextUIProvider>   
                                     <Component
                                         {...pageProps}
                                         key={router.route}
                                     />
+                                    </NextUIProvider>
                                     <ToastContainer />
                                     {/* <ScrollToTop /> */}
                                 </Layout>{" "}

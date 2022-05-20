@@ -46,7 +46,7 @@ model Rooms{
   hasHeating Boolean?
   hasInternet Boolean?
   price Int
-  rating Int
+  rating Int @default(0)
   pubishedAt DateTime @default(now())
   owner Users @relation(fields: [ownerId], references: [id])
   ownerId Int

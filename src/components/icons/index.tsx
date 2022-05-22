@@ -23,3 +23,5 @@ export {default as AirbnbPrivacy} from "./AirbnbPrivacy";
 export {default as VerifyIcon} from "./VerifyIcon";
 export {default as PaypalIcon} from "./PaypalIcon";
 export {default as GooglePayIcon} from "./GooglePayIcon";
+export {default as WayToPoolIcon} from "./WayToPoolIcon";
+export {default as TVIcon} from "./TVIcon";

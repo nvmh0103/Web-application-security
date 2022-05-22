@@ -28,6 +28,13 @@ export interface Location {
     longitude: number;
 }
 
+export interface Picture {
+    id: number;
+    url: string;
+    type: string;
+    roomId: number;
+}
+
 export interface Datum {
     id: number;
     name: string;
@@ -55,7 +62,7 @@ export interface Datum {
     locationId: number;
     totalReviews: number;
     location: Location;
-    pictures: any[];
+    pictures: Picture[];
     reviews: any[];
 }
 
@@ -81,10 +88,8 @@ const getInfoRooms = async () =>
         )
     ).json();
 
-export const InfoCards: React.FC<Pagination> = ({
-    currentPage,
-    hasNextPage,
-    hasPreviousPage,
+export const InfoCards: React.FC = ({
+    
 }) => {
     // const address = `https://cc62e73f33af4d5eb355d601efc35466-3afda50d-vm-80.vlab2.uit.edu.vn/api/v1${API_ENDPOINTS.GET_ROOMS}?page=1&limit=2`;
 
@@ -118,8 +123,9 @@ export const InfoCards: React.FC<Pagination> = ({
                                         roomID: "room_id=" + el.id,
 
                                         place: location,
-
-                                        title: el.summary,
+                                        displayName: el.location.displayName,
+                                        title: el.name,
+                                        homeType: el.homeType,
                                         totalGuests: el.totalOccupancy,
                                         totalBedrooms: el.totalBedrooms,
                                         totalBathrooms: el.totalBathrooms,
@@ -131,19 +137,19 @@ export const InfoCards: React.FC<Pagination> = ({
                                         star: el.rating,
                                         rating: el.totalReviews,
                                         price: el.price,
-                                        // img: data.img,
+                                        img: el.pictures[0].url,
                                     },
                                 });
                             }
                         }}
                     >
                         <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0 ">
-                            {/* <Image
-                                src={data.img}
+                            <Image
+                                src={el.pictures[0].url}
                                 layout="fill"
                                 objectFit="cover"
                                 className="rounded-lg"
-                            /> */}
+                            />
                         </div>
                         <div className="flex flex-col flex-grow pl-5">
                             <div className="flex justify-between">
@@ -170,7 +176,7 @@ export const InfoCards: React.FC<Pagination> = ({
                             </div>
 
                             <h4 className="text-xl font-semibold">
-                                {el?.summary}
+                                {el?.name}
                             </h4>
 
                             <div className="border-b w-10 pt-2 border-gray-500" />

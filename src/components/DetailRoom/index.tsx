@@ -14,6 +14,9 @@ import {
     MinusSmIcon,
     PlusCircleIcon,
     ShareIcon,
+    WifiIcon,
+    FireIcon,
+    CalendarIcon,
 } from "@heroicons/react/outline";
 import { Item } from "framer-motion/types/components/Reorder/Item";
 import {
@@ -38,6 +41,8 @@ import { CommentCards } from "@components/CommnentCards";
 import { Map } from "@components/map";
 import { MoreUnderline } from "@components/moreUnderline";
 import { AirbnbPrivacy } from "@components/icons";
+import { WayToPoolIcon } from "@components/icons";
+import { TVIcon } from "@components/icons";
 
 interface idProps {
     id: string;
@@ -56,8 +61,11 @@ export const DetailRoom: React.FC = (
 
     const {
         roomID,
+        img,
         place,
         title,
+        displayName,
+        homeType,
         totalGuests,
         totalBedrooms,
         totalBathrooms,
@@ -70,7 +78,6 @@ export const DetailRoom: React.FC = (
         rating,
         price,
     } = Router.query;
-
 
     const [pickDay, setPickDay] = useState([
         {
@@ -166,21 +173,25 @@ export const DetailRoom: React.FC = (
                         <div className="flex flex-col w-[58.333333333333336%]">
                             <div className="flex flex-col pb-6 border-b border-gray-300">
                                 <h1 className="font-semibold text-black text-2xl">
-                                    {location} {place}. Chủ nhà DA
+                                    {"Toàn bộ " +
+                                        homeType +
+                                        " tại " +
+                                        displayName +
+                                        ". Chủ nhà DA"}
                                 </h1>
                                 <p className="font-normal flex">
-                                {totalGuests + "  khách ·  "}
-                                {totalBedrooms === "0"
-                                    ? ""
-                                    : totalBedrooms + "  phòng ngủ ·  "}
-                                {totalBathrooms === "0"
-                                    ? ""
-                                    : totalBathrooms + "  phòng tắm ·  "}
-                                {hasTv == "true" ? "" : "Tivi ·  "}
-                                {hasWifi == "true" ? "" : "Wi-fi ·  "}
-                                {hasKitchen == "true" ? "" : "Bếp ·  "}
-                                {hasAirCon == "true" ? "" : "Điều hòa ·  "}
-                                {hasHeating == "true" ? "" : "Máy sưởi ·  "}
+                                    {totalGuests + "  khách ·  "}
+                                    {totalBedrooms === "0"
+                                        ? ""
+                                        : totalBedrooms + "  phòng ngủ ·  "}
+                                    {totalBathrooms === "0"
+                                        ? ""
+                                        : totalBathrooms + "  phòng tắm ·  "}
+                                    {hasTv == "true" ? "" : "Tivi ·  "}
+                                    {hasWifi == "true" ? "" : "Wi-fi ·  "}
+                                    {hasKitchen == "true" ? "" : "Bếp ·  "}
+                                    {hasAirCon == "true" ? "" : "Điều hòa ·  "}
+                                    {hasHeating == "true" ? "" : "Máy sưởi ·  "}
                                 </p>
                             </div>
                             <div className="flex flex-col py-6 border-b border-gray-300">
@@ -238,48 +249,58 @@ export const DetailRoom: React.FC = (
                                 <div className="flex font-normal text-black justify-between">
                                     <div className="flex flex-col space-y-4 flex-grow">
                                         <div className="flex">
+                                            <div className="mr-2">
+                                                {" "}
+                                                <WayToPoolIcon />{" "}
+                                            </div>
+                                            <p>Lối ra hồ</p>
+                                        </div>
+                                        <div className="flex">
+                                            {hasWifi && (
+                                                <>
+                                                    <WifiIcon className="w-6 h-6 mr-2" />
+                                                    <p>Wi-fi</p>
+                                                </>
+                                            )}
+                                        </div>
+                                        <div className="flex">
+                                            <KeyIcon className="w-6 h-6 mr-2" />
+                                            <p>Tự nhận phòng</p>
+                                        </div>
+                                        {/* <div className="flex">
                                             <StarIcon className="w-6 h-6 mr-2" />
                                             <p>Lối ra hồ</p>
                                         </div>
                                         <div className="flex">
                                             <StarIcon className="w-6 h-6 mr-2" />
                                             <p>Lối ra hồ</p>
-                                        </div>
-                                        <div className="flex">
-                                            <StarIcon className="w-6 h-6 mr-2" />
-                                            <p>Lối ra hồ</p>
-                                        </div>
-                                        <div className="flex">
-                                            <StarIcon className="w-6 h-6 mr-2" />
-                                            <p>Lối ra hồ</p>
-                                        </div>
-                                        <div className="flex">
-                                            <StarIcon className="w-6 h-6 mr-2" />
-                                            <p>Lối ra hồ</p>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                     <div className="lg:flex lg:flex-col space-y-4 flex-grow hidden">
                                         <div className="flex">
+                                            <FireIcon className="w-6 h-6 mr-2" />
+                                            <p>Lò sưởi trong nhà</p>
+                                        </div>
+                                        <div className="flex">
+                                            <CalendarIcon className="w-6 h-6 mr-2" />
+                                            <p>Cho phép ở dài hạn</p>
+                                        </div>
+                                        <div className="flex">
+                                            <div className="mr-2">
+                                                {" "}
+                                                <TVIcon />{" "}
+                                            </div>
+                                            <p>TV và Netflix</p>
+                                        </div>
+                                        {/* <div className="flex">
                                             <StarIcon className="w-6 h-6 mr-2" />
                                             <p>Lối ra hồ</p>
                                         </div>
                                         <div className="flex">
                                             <StarIcon className="w-6 h-6 mr-2" />
                                             <p>Lối ra hồ</p>
-                                        </div>
-                                        <div className="flex">
-                                            <StarIcon className="w-6 h-6 mr-2" />
-                                            <p>Lối ra hồ</p>
-                                        </div>
-                                        <div className="flex">
-                                            <StarIcon className="w-6 h-6 mr-2" />
-                                            <p>Lối ra hồ</p>
-                                        </div>
-                                        <div className="flex">
-                                            <StarIcon className="w-6 h-6 mr-2" />
-                                            <p>Lối ra hồ</p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 <button className="w-2/5 mt-10 py-3 cursor-pointer active:scale-95 active:bg-gray 100 transition transform ease-out block border rounded-xl font-medium text-black hover:bg-gray-300  duration-200 ">
@@ -484,13 +505,15 @@ export const DetailRoom: React.FC = (
                                             Router.push({
                                                 pathname: "/payment/confirm",
                                                 query: {
-                                                    // img: img,
+                                                    img: img,
                                                     roomID: roomID,
                                                     place: place,
                                                     startDate:
                                                         formattedStartDate,
                                                     endDate: formattedEndDate,
                                                     guests: guests,
+                                                    adults: adults,
+                                                    children: children,
                                                     price: price,
                                                     // location: location,
                                                     rating: rating,
@@ -552,9 +575,9 @@ export const DetailRoom: React.FC = (
                                 Mức độ sạch sẽ
                             </div>
 
-                            <div className="h-1 bg-black rounded-full w-[20%]"></div>
+                            {/* <div className="h-1 bg-black rounded-full w-[20%]"></div> */}
                             <span className="text-black font-bold text-xs ml-2">
-                                4.8
+                                0
                             </span>
                         </div>
 
@@ -563,9 +586,9 @@ export const DetailRoom: React.FC = (
                                 Giao tiếp
                             </div>
 
-                            <div className="h-1 bg-black rounded-full w-[20%]"></div>
+                            {/* <div className="h-1 bg-black rounded-full w-[20%]"></div> */}
                             <span className="text-black font-bold text-xs ml-2">
-                                4.9
+                                0
                             </span>
                         </div>
 
@@ -574,9 +597,9 @@ export const DetailRoom: React.FC = (
                                 Nhận phòng
                             </div>
 
-                            <div className="h-1 bg-black rounded-full w-[20%]"></div>
+                            {/* <div className="h-1 bg-black rounded-full w-[20%]"></div> */}
                             <span className="text-black font-bold text-xs ml-2">
-                                4.7
+                                0
                             </span>
                         </div>
                     </div>
@@ -587,45 +610,47 @@ export const DetailRoom: React.FC = (
                                 Độ chính xác
                             </div>
 
-                            <div className="h-1 bg-black rounded-full w-[20%]"></div>
+                            {/* <div className="h-1 bg-black rounded-full w-[20%]"></div> */}
                             <span className="text-black font-bold text-xs ml-2">
-                                4.9
+                                0
                             </span>
                         </div>
 
                         <div className="flex justify-between items-center">
                             <div className="font-normal flex-grow">Vị trí</div>
 
-                            <div className="h-1 bg-black rounded-full w-[20%]"></div>
+                            {/* <div className="h-1 bg-black rounded-full w-[20%]"></div> */}
                             <span className="text-black font-bold text-xs ml-2">
-                                5.0
+                                0
                             </span>
                         </div>
 
                         <div className="flex justify-between items-center">
                             <div className="font-normal flex-grow">Giá trị</div>
 
-                            <div className="h-1 bg-black rounded-full w-[20%]"></div>
+                            {/* <div className="h-1 bg-black rounded-full w-[20%]"></div> */}
                             <span className="text-black font-bold text-xs ml-2">
-                                4.9
+                                0
                             </span>
                         </div>
                     </div>
                 </div>
 
                 {/* Comment */}
-                <div className="">
+                {/* <div className="">
                     <CommentCards />
-                </div>
+                </div> */}
 
-                <div>
+                {/* <div>
                     {" "}
                     <MoreUnderline title="Hiển thị thêm" />{" "}
-                </div>
+                </div> */}
 
                 <button className="w-1/4 my-10 py-3 cursor-pointer active:scale-95 active:bg-gray 100 transition transform ease-out block border rounded-xl font-medium text-black hover:bg-gray-300  duration-200 ">
-                    {" "}
-                    Hiển thị tất cả {rating} đánh giá{" "}
+                    {rating !== "0" &&
+                        "Hiển thị tất cả " + rating + " đánh giá"}
+
+                    {rating === "0" && "Đánh giá tại đây"}
                 </button>
 
                 <div className="border-b border-gray-300"></div>
@@ -650,7 +675,7 @@ export const DetailRoom: React.FC = (
                         <div className="flex items-center">
                             <StarIcon className="h-5 w-5 text-black mr-2" />
                             <p className="font-normal text-black">
-                                78 đánh giá
+                                11 đánh giá
                             </p>
                         </div>
 

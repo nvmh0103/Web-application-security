@@ -130,10 +130,7 @@ const Search: React.FC = () => {
                             </p>
 
                             <InfoCards
-                            currentPage={page}
-                            hasNextPage={page + 1}
-                            hasPreviousPage={page - 1}
-                            totalPage={""}
+                            
                             
                             // key={items.key}
                             // img={items.img}
@@ -178,7 +175,7 @@ const Search: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="hidden lg:flex-grow lg:inline-flex lg:w-2/5  max-h-[600px] sticky top-[15%]">
+                    <div className="hidden lg:flex-grow lg:inline-flex lg:w-2/5  h-[500px] sticky top-[20%]">
                         <Map />
                     </div>
                 </section>

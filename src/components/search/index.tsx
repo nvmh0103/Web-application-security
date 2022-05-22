@@ -155,6 +155,7 @@ export const Search: React.FC<Props> = ({
                                             endDate:
                                                 pickDay[0].endDate.toISOString(),
                                             guests: guests,
+                                            page: 1,
                                         },
                                     });
                                 }}
@@ -215,7 +216,7 @@ export const Search: React.FC<Props> = ({
                                                 pickDay[0].endDate.toISOString(),
                                             guests: guests,
                                             page: 1,
-                                            limit: 5,
+                                            
                                         },
                                     });
                                 }}

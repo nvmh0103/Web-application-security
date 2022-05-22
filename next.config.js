@@ -95,6 +95,7 @@ const config = {
             "a0.muscache.com",
             "events.mapbox.com",
             "media.discordapp.net",
+            "nvmh0103-bucket.s3.us-east-1.amazonaws.com",
         ],
     },
 

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 export const Payment: React.FC = () => {
     const Router = useRouter();
 
-    const { img, location, title, star, rate } = Router.query;
+    const { img, location, title, star, rating } = Router.query;
 
     return (
         <div className="" id="listing_card">
@@ -36,7 +36,7 @@ export const Payment: React.FC = () => {
                                 {star}
                             </div>
                             <div className="font-normal text-xs">
-                                {"(" + rate + " đánh giá)"}
+                                {"(" + rating + " đánh giá)"}
                             </div>
                         </div>
                     </div>

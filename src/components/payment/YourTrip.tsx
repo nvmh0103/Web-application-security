@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 export const Payment: React.FC = () => {
     const Router = useRouter();
 
-    const { startDate, endDate, guests } = Router.query;
+    const { startDate, endDate, guests, adults, children } = Router.query;
 
     return (
         <div className="pb-6 border-b border-gray-300 pt-6">
@@ -29,7 +29,7 @@ export const Payment: React.FC = () => {
             <div className="flex justify-between">
                 <div className="flex flex-col space-y-1">
                     <h2 className="text-black font-semibold"> Khách </h2>
-                    <p className="text-black">{guests + " khách"} </p>
+                    <p className="text-black">{guests + " khách (" + adults + " người lớn và " + children + " trẻ em)"} </p>
                 </div>
 
                 

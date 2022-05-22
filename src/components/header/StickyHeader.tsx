@@ -9,6 +9,8 @@ import { Menu } from "@components/menu/Menu";
 import Search from "@components/search";
 import { MenuUser } from "@components/menu/MenuUser";
 import { getCookie } from "cookies-next";
+import MenuMobile from "@components/menu/MenuMobile";
+import MenuMobileUser from "@components/menu/MenuMobileUser";
 
 interface Props {
     title?: string;
@@ -31,7 +33,7 @@ export const StickyHeader: React.FC<Props> = ({
 
     return (
         <div className="sticky top-0 z-10">
-            <div className=" grid grid-cols-3 bg-white shadow-md py-3 lg:px-20 px-10">
+            <div className=" grid grid-cols-3 bg-white shadow-md py-3 lg:px-20 px-10 relative">
                 <div className=" flex items-center h-10 cursor-pointer my-auto ">
                     <a className="" href="/">
                         <AirbnbIcon />
@@ -81,15 +83,30 @@ export const StickyHeader: React.FC<Props> = ({
                                 }}
                             >
                                 <MenuIcon className="h-6" />
-                                <UserIcon className="h-6" />
+                                {!value && <UserIcon className="h-6" />}
+
+                                {value && (
+                                    <img
+                                        src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3"
+                                        className="rounded-full w-[28px] h-[28px] block mx-auto"
+                                    ></img>
+                                )}
                             </Button>
 
-                            {!value && stateMenu && <Menu />}
+                            <div className="hidden md:block">
+                                {!value && stateMenu && <Menu />}
 
-                            {value && stateMenu && <MenuUser />}
+                                {value && stateMenu && <MenuUser />}
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className=" md:hidden">
+                {!value && stateMenu && <MenuMobile />}
+
+                {value && stateMenu && <MenuMobileUser />}
             </div>
 
             {stateSearch && <Search place={place} />}

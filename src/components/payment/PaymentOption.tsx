@@ -43,7 +43,7 @@ export const Payment: React.FC = () => {
                 <h2 className="text-black font-semibold text-2xl">
                     Thanh toán bằng
                 </h2>
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-x-2 sm:space-y-0">
                     <img
                         className="w-[29px] h-[9px]"
                         src="https://a0.muscache.com/airbnb/static/packages/assets/frontend/legacy-shared/svgs/payments/logo_visa.0adea522bb26bd90821a8fade4911913.svg"

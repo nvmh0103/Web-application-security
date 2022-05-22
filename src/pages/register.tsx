@@ -77,7 +77,7 @@ export const SignUp: React.FC<Props> = (
 
            <Register/> 
 
-            <div className="hidden lg:block"><Footer /> </div>
+            <div className="hidden md:block"><Footer /> </div>
         </div>
     );
 };

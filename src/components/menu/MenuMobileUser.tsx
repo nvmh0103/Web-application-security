@@ -3,7 +3,7 @@ import { Login } from "@components/login";
 import { useOnClickOutside } from "usehooks-ts";
 import { setCookies, getCookie, removeCookies } from "cookies-next";
 
-export const MenuUser: React.FC = () => {
+export const MenuMobileUser: React.FC = () => {
     const [isOpen, setIsOpen] = useState(true);
 
     const ref = useRef(null);
@@ -24,11 +24,11 @@ export const MenuUser: React.FC = () => {
         <div className="">
             {isOpen && (
                 <div
-                    className="bg-white w-4/5 absolute top-16 rounded-xl py-3 right-0 opacity-100  z-50 items-right border border-gray-300 shadow-subMenu"
+                    className="bg-white w-2/5 absolute top-16 rounded-xl py-3 right-10 opacity-100  z-50 items-right border border-gray-300 shadow-subMenu"
                     ref={ref}
                 >
                     <ul className="space-y-3 font-normal">
-                        <li className="font-bold text-black hover:bg-gray-300 py-1 px-5">
+                    <li className="font-bold text-black hover:bg-gray-300 py-1 px-5">
                             <a href="">Tin nhắn</a>
                         </li>
 
@@ -85,4 +85,4 @@ export const MenuUser: React.FC = () => {
     );
 };
 
-export default MenuUser;
+export default MenuMobileUser;

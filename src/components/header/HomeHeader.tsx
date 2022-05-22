@@ -26,8 +26,6 @@ export const HomeHeader: React.FC<Props> = ({
     const [stateMenu, setStateMenu] = useState(false);
     const [stateSearch, setStateSearch] = useState(false);
 
-    
-
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState(event.target.value);
     };
@@ -83,7 +81,14 @@ export const HomeHeader: React.FC<Props> = ({
                                 }}
                             >
                                 <MenuIcon className="h-6" />
-                                <UserIcon className="h-6" />
+                                {!value && <UserIcon className="h-6" />}
+
+                                {value && (
+                                    <img
+                                        src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3"
+                                        className="rounded-full w-[28px] h-[28px] block mx-auto"
+                                    ></img>
+                                )}
                             </Button>
 
                             {!value && stateMenu && <Menu />}

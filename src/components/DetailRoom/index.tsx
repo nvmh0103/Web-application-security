@@ -54,8 +54,23 @@ export const DetailRoom: React.FC = (
 ) => {
     const Router = useRouter();
 
-    const { location, roomID, title, place, star, rate, price, description, img } =
-        Router.query;
+    const {
+        roomID,
+        place,
+        title,
+        totalGuests,
+        totalBedrooms,
+        totalBathrooms,
+        hasTv,
+        hasKitchen,
+        hasAirCon,
+        hasHeating,
+        hasWifi,
+        star,
+        rating,
+        price,
+    } = Router.query;
+
 
     const [pickDay, setPickDay] = useState([
         {
@@ -71,16 +86,15 @@ export const DetailRoom: React.FC = (
     );
     const formattedEndDate = format(new Date(pickDay[0].endDate), "dd/MM/yyyy");
 
-    const dayNum = new Date(pickDay[0].endDate).getDate() - new Date(pickDay[0].startDate).getDate();
+    const dayNum =
+        new Date(pickDay[0].endDate).getDate() -
+        new Date(pickDay[0].startDate).getDate();
 
-    
     const [adults, setAdults] = useState(1);
     const [children, setChildren] = useState(0);
     const [openGuests, setOpenGuests] = useState(false);
-    
 
     const guests = adults + children;
-
 
     return (
         <div>
@@ -96,7 +110,7 @@ export const DetailRoom: React.FC = (
                             {star + " · "}
                         </div>
                         <p className="ml-2 items-center m-0 underline text-black cursor-pointer">
-                            {rate + " đánh giá"}
+                            {rating + " đánh giá"}
                         </p>
                         <p className="m-0 text-black ml-2 "> · </p>
                         <p className="underline ml-2 items-center text-black cursor-pointer">
@@ -154,7 +168,20 @@ export const DetailRoom: React.FC = (
                                 <h1 className="font-semibold text-black text-2xl">
                                     {location} {place}. Chủ nhà DA
                                 </h1>
-                                <p className="font-normal">{description}</p>
+                                <p className="font-normal flex">
+                                {totalGuests + "  khách ·  "}
+                                {totalBedrooms === "0"
+                                    ? ""
+                                    : totalBedrooms + "  phòng ngủ ·  "}
+                                {totalBathrooms === "0"
+                                    ? ""
+                                    : totalBathrooms + "  phòng tắm ·  "}
+                                {hasTv == "true" ? "" : "Tivi ·  "}
+                                {hasWifi == "true" ? "" : "Wi-fi ·  "}
+                                {hasKitchen == "true" ? "" : "Bếp ·  "}
+                                {hasAirCon == "true" ? "" : "Điều hòa ·  "}
+                                {hasHeating == "true" ? "" : "Máy sưởi ·  "}
+                                </p>
                             </div>
                             <div className="flex flex-col py-6 border-b border-gray-300">
                                 <div className="flex mb-6">
@@ -257,7 +284,7 @@ export const DetailRoom: React.FC = (
                                 </div>
                                 <button className="w-2/5 mt-10 py-3 cursor-pointer active:scale-95 active:bg-gray 100 transition transform ease-out block border rounded-xl font-medium text-black hover:bg-gray-300  duration-200 ">
                                     {" "}
-                                    Hiển thị tất cả 32 tiện nghi{" "}
+                                    Hiển thị tất cả tiện nghi{" "}
                                 </button>
                             </div>
                             <h2 className="text-2xl mt-8 text-black">
@@ -299,7 +326,7 @@ export const DetailRoom: React.FC = (
                                             {star}
                                             <div className="mx-1">·</div>
                                             <div className="underline text-black">
-                                                {rate} đánh giá
+                                                {rating} đánh giá
                                             </div>
                                         </div>
                                     </div>
@@ -365,25 +392,40 @@ export const DetailRoom: React.FC = (
                                                             {" "}
                                                             Người lớn{" "}
                                                         </h2>
-                                                        <p className="">Từ 13 tuổi trở lên</p>
+                                                        <p className="">
+                                                            Từ 13 tuổi trở lên
+                                                        </p>
                                                     </div>
 
                                                     <div className="flex items-center">
-                                                        <PlusSmIcon className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
+                                                        <PlusSmIcon
+                                                            className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
                                                             onClick={() => {
-                                                               
-                                                                setAdults(adults + 1);
-                                                                
-                                                            }} />
-                                                        <div className="text-black text-xl mx-4">{adults}</div>
-                                                        <MinusSmIcon className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
+                                                                setAdults(
+                                                                    adults + 1,
+                                                                );
+                                                            }}
+                                                        />
+                                                        <div className="text-black text-xl mx-4">
+                                                            {adults}
+                                                        </div>
+                                                        <MinusSmIcon
+                                                            className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
                                                             onClick={() => {
-                                                               
-                                                                setAdults(adults - 1);
-                                                                
-                                                                adults <= 1 ? setAdults(1) : setAdults(adults - 1);
-                                                                
-                                                            }} />
+                                                                setAdults(
+                                                                    adults - 1,
+                                                                );
+
+                                                                adults <= 1
+                                                                    ? setAdults(
+                                                                          1,
+                                                                      )
+                                                                    : setAdults(
+                                                                          adults -
+                                                                              1,
+                                                                      );
+                                                            }}
+                                                        />
                                                     </div>
                                                 </div>
 
@@ -393,24 +435,42 @@ export const DetailRoom: React.FC = (
                                                             {" "}
                                                             Trẻ em{" "}
                                                         </h2>
-                                                        <p className="">Từ 13 tuổi trở xuống</p>
+                                                        <p className="">
+                                                            Từ 13 tuổi trở xuống
+                                                        </p>
                                                     </div>
 
                                                     <div className="flex items-center">
-                                                        <PlusSmIcon className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
+                                                        <PlusSmIcon
+                                                            className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
                                                             onClick={() => {
-                                                                
-                                                                setChildren(children + 1);
-                                                                
-                                                            }} />
-                                                        <div className="text-black text-xl mx-4">{children}</div>
-                                                        <MinusSmIcon className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
+                                                                setChildren(
+                                                                    children +
+                                                                        1,
+                                                                );
+                                                            }}
+                                                        />
+                                                        <div className="text-black text-xl mx-4">
+                                                            {children}
+                                                        </div>
+                                                        <MinusSmIcon
+                                                            className="w-8 h-8 p-1 text-black font-normal rounded-40 border cursor-pointer"
                                                             onClick={() => {
-                                                                
-                                                                setChildren(children - 1);
-                                                                
-                                                                children <= 0 ? setChildren(0) : setChildren(children - 1);
-                                                            }} />
+                                                                setChildren(
+                                                                    children -
+                                                                        1,
+                                                                );
+
+                                                                children <= 0
+                                                                    ? setChildren(
+                                                                          0,
+                                                                      )
+                                                                    : setChildren(
+                                                                          children -
+                                                                              1,
+                                                                      );
+                                                            }}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -424,25 +484,22 @@ export const DetailRoom: React.FC = (
                                             Router.push({
                                                 pathname: "/payment/confirm",
                                                 query: {
-                                                    img: img,
+                                                    // img: img,
                                                     roomID: roomID,
                                                     place: place,
                                                     startDate:
                                                         formattedStartDate,
-                                                    endDate:
-                                                        formattedEndDate,
+                                                    endDate: formattedEndDate,
                                                     guests: guests,
                                                     price: price,
-                                                    location: location,
-                                                    rate: rate,
+                                                    // location: location,
+                                                    rating: rating,
                                                     star: star,
                                                     title: title,
-                                                    dayNum : dayNum,
-                                                    
-
+                                                    dayNum: dayNum,
                                                 },
                                             });
-                                         }}
+                                        }}
                                     >
                                         Thanh toán
                                     </button>
@@ -484,7 +541,7 @@ export const DetailRoom: React.FC = (
                     <h2 className="text-2xl text-black">{star}</h2>
                     <div className="mx-1 text-black text-2xl">·</div>
                     <h2 className="text-2xl text-black">
-                        {rate + " đánh giá"}
+                        {rating + " đánh giá"}
                     </h2>
                 </div>
 
@@ -568,7 +625,7 @@ export const DetailRoom: React.FC = (
 
                 <button className="w-1/4 my-10 py-3 cursor-pointer active:scale-95 active:bg-gray 100 transition transform ease-out block border rounded-xl font-medium text-black hover:bg-gray-300  duration-200 ">
                     {" "}
-                    Hiển thị tất cả {rate} đánh giá{" "}
+                    Hiển thị tất cả {rating} đánh giá{" "}
                 </button>
 
                 <div className="border-b border-gray-300"></div>

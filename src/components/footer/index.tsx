@@ -13,6 +13,9 @@ import {
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
+import { Modal } from "@nextui-org/react";
+
+
 export const Footer: React.FC = () => {
     const languageOption = ["Tiếng Việt (VN)", "English (EN)"];
     const currencyOption = ["VND", "USD"];
@@ -240,7 +243,10 @@ export const Footer: React.FC = () => {
                         <a className="text-black hover:underline font-semibold cursor-pointer ">Tiếng Việt (VN)</a>
                     </div>
 
-                    <div className="flex space-x-1 cursor-pointer justify-center">
+                    <div className="flex space-x-1 cursor-pointer justify-center" 
+                    onClick={() => {
+                        <Modal />
+                    }} >
                         <span className="w-4 h-4 text-center mb-1 text-black"> $ </span>
                         <a className="text-black hover:underline font-semibold">USD</a>
                     </div>

@@ -27,6 +27,10 @@ import {
     ExclamationCircleIcon,
 } from "@heroicons/react/outline";
 import { Router, useRouter } from "next/router";
+import axios from "axios";
+import { toast } from "react-toastify";
+// import { API_ENDPOINTS } from "@utils/apiEndpoints";
+
 type PaymentOptionProps = {
     cardNumber: number;
     expiredDate: string;
@@ -44,7 +48,69 @@ export const Payment: React.FC = () => {
 
     const Router = useRouter();
 
-    const onSubmit: SubmitHandler<PaymentOptionProps> = (data) => {};
+    const onSubmit = handleSubmit(async (user) => {
+        setIsLoading(true);
+        const response = await axios
+            .post(
+                `https://cc62e73f33af4d5eb355d601efc35466-3afda50d-vm-80.vlab2.uit.edu.vn/api/v1${API_ENDPOINTS.LOGIN}`,
+                user,
+            )
+            .then((res) => {
+                toast.info("Thành công!", {
+                    position: "top-right",
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    autoClose: 3000,
+                });
+
+                Router.push("/payment/success");
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                if (err.response.status === 400) {
+                    toast.error("Tài khoản hoặc mật khẩu không đúng", {
+                        position: "top-right",
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: false,
+                        autoClose: 3000,
+                    });
+
+                    setIsLoading(false);
+                }
+
+                if (err.response.status === 403) {
+                    toast.error("Forbidden", {
+                        position: "top-right",
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: false,
+                        autoClose: 3000,
+                    });
+                    setIsLoading(false);
+                }
+
+                if (err.response.status === 500) {
+                    toast.error(
+                        "Đã có lỗi xảy ra, vui lòng liên hệ bộ phận CSKH để được hỗ trợ",
+                        {
+                            position: "top-right",
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: false,
+                            autoClose: 3000,
+                        },
+                    );
+                    setIsLoading(false);
+                }
+            });
+    });
+
 
     const [openCreditCard, setOpenCreditCard] = useState(false);
     const [openNation, setOpenNation] = useState(false);
@@ -55,8 +121,8 @@ export const Payment: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     return (
-        <div className="">
-            <div className="flex pt-6 pb-10 sticky top-0 bg-white">
+        <div className="mx-[12%]">
+            <div className="flex pt-6 pb-10 sticky top-0 bg-white z-50">
                 <a href="/">
                     <ChevronLeftIcon className="w-8 h-8 mr-3 text-black p-1 rounded-full self-center hover:bg-gray-300 cursor-pointer" />
                 </a>
@@ -66,7 +132,7 @@ export const Payment: React.FC = () => {
                 </h1>
             </div>
 
-            <div className="mx-[12%]">
+            <div className="">
                 <ListingCard />
 
                 <YourTrip />
@@ -474,7 +540,28 @@ export const Payment: React.FC = () => {
                         Nhập mã giảm giá
                     </div>
                 </div>
+
+                <PriceDetail />
+
+                <CancellationPolicy />
+
+                <TermsAndConditions />
+
+                <button
+                        type="submit"
+                        className="bg-gradient-to-r from-[#e61e4d] to-[#d70466] w-full rounded-xl py-3 mt-5 mb-20 text-white active:bg-pink-500 hover:shadow-xl active:scale-90 transition duration-150 font-medium md:w-2/3 text-xl cursor-pointer"
+                        onClick={onSubmit}
+                    >
+                        {isLoading ? (
+                            <Loading type="default" color="white" />
+                        ) : (
+                            "Xác nhận và thanh toán - Airbnb"
+                        )}
+                    </button>
+
             </div>
+
+            <Footer />
         </div>
     );
 };

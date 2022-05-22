@@ -102,7 +102,7 @@ export const Register: React.FC = () => {
     // useOnClickOutside(ref, handleClickOutside);
 
     return (
-        <div className="center block bg-white relative border border-gray-400 rounded-xl w-full lg:w-2/5 mx-auto lg:mt-14 lg:mb-10 ">
+        <div className="center block bg-white relative border border-gray-400 rounded-xl w-full lg:w-2/5 md:w-3/5 mx-auto md:mt-14 md:mb-10 ">
             <div className=" text-black ">
                 {/* Title */}
 

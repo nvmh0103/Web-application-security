@@ -58,7 +58,18 @@ export const LoginHeader: React.FC = () => {
                                     }}
                                 >
                                     <MenuIcon className="h-6" />
+
+                                    { !value &&
                                     <UserIcon className="h-6" />
+                                    }
+
+                                    {value &&
+                                    <img
+                                    src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3"
+                                    className="rounded-full w-[28px] h-[28px] block mx-auto"
+                                ></img>
+}
+
                                 </Button>
 
                                 {!value && (

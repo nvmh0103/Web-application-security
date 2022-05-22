@@ -11,7 +11,7 @@ export const Payment: React.FC = () => {
     const { startDate, endDate, guests } = Router.query;
 
     return (
-        <div className="pb-6 border-b border-gray-300">
+        <div className="pb-6 border-b border-gray-300 pt-6">
             <h2 className="text-2xl text-black font-semibold pb-2">
                 Chuyến đi của bạn
             </h2>

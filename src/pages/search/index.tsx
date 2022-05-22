@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import LoginHeader from "@components/header/LoginHeader";
 import { StickyHeader } from "@components/header/StickyHeader";
@@ -20,6 +20,8 @@ import { Map } from "@components/map";
 const Search: React.FC = () => {
     const router = useRouter();
     const { location, startDate, endDate, guests } = router.query;
+
+    const [page, setPage] = useState(1);
 
     // const startDateFormat = format(new Date(startDate), "dd/MM/yyyy");
     // const endDateFormat = format(endDate, "dd/MM/yyyy");
@@ -109,11 +111,11 @@ const Search: React.FC = () => {
                     <div className="xl:w-3/5 ">
                         <hr className="text-gray-300 "></hr>
                         <div className="px-4">
-                            <p className="my-4 text-sm">
+                            {/* <p className="my-4 text-sm">
                                 Hơn 300 chỗ ở tại {location}{" "}
-                            </p>
+                            </p> */}
 
-                            <p className="pb-4 m-0">
+                            <p className="py-4 mt-2 ">
                                 Kiểm tra lại quy định hạn chế đi lại trong đại
                                 dịch COVID-19 trước khi đặt.
                                 <span>
@@ -128,7 +130,10 @@ const Search: React.FC = () => {
                             </p>
 
                             <InfoCards
-                            
+                            currentPage={page}
+                            hasNextPage={page + 1}
+                            hasPreviousPage={page - 1}
+                            totalPage={""}
                             
                             // key={items.key}
                             // img={items.img}
@@ -155,7 +160,7 @@ const Search: React.FC = () => {
                                 <button className="rounded-full bg-black text-white w-8 h-8 font-bold">1</button>
                                 <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">2</button>
                                 <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">3</button>
-                                <div className="items-center font-bold text-black align-baseline">...</div>
+                                {/* <div className="items-center font-bold text-black align-baseline">...</div> */}
                                 <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">4</button>
                                 <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">5</button>
                                 <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">6</button>
@@ -168,7 +173,7 @@ const Search: React.FC = () => {
                                 </button>
                                 
                             </div>
-                            <p className="text-sm text-center pb-8 m-0">1 - 6 trong số hơn 300 chỗ ở</p>
+                            {/* <p className="text-sm text-center pb-8 m-0">1 - 6 trong số hơn 300 chỗ ở</p> */}
                             <p className="text-xs text-center pb-6">Nhập ngày để xem giá đầy đủ. Áp dụng phụ phí. Có thể phát sinh thuế.</p>
                         </div>
                     </div>

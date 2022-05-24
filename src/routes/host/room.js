@@ -7,7 +7,7 @@ const router = new express.Router();
 
 
 router.post('/', auth, roomController.createRoom);
-router.get('/', roomController.getRooms);
+router.get('/',auth, roomController.getHostRoom);
 router.get('/:id', roomController.getSpecificRoom);
 router.put('/:id', auth, roomController.updateRoom);
 router.delete('/:id', auth, roomController.deleteRoom);

@@ -24,7 +24,7 @@ export const Main: React.FC = () => {
                     <img
                         src="https://a0.muscache.com/im/pictures/c2adcb16-6c3f-4041-86a1-afa9c303c500.jpg?im_w=720"
                         alt=""
-                        className="object-cover rounded-2xl "
+                        className="object-cover rounded-2xl z-0 "
                     />
 
                     <div className="absolute xl:top-32 xl:left-12 top-10 left-6 text-white">
@@ -72,7 +72,7 @@ export const Main: React.FC = () => {
                             <br className="hidden sm:block"></br> 
                             đón tiếp khách?
                         </h1>
-                        <button className="text-sm font-semibold  text-black bg-white rounded-lg md:mt-5 px-3 py-3 hover:bg-gray-300">
+                        <button className="text-sm font-semibold  text-black bg-white rounded-lg md:mt-5 px-3 py-3 lg:p-4 lg:text-base hover:bg-gray-300">
                             Hỏi ý kiến Chủ nhà siêu cấp
                         </button>
                     </div>

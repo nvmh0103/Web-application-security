@@ -12,8 +12,8 @@ export const Payment: React.FC = () => {
 
     return (
         <div className="" id="listing_card">
-            <div className="px-6 ">
-                <div className="flex border-b border-gray-300 py-6">
+            <div className="">
+                <div className="flex border-b border-gray-300 p-6">
                     <div className="w-1/3">
                         <img
                             src={img}
@@ -43,8 +43,8 @@ export const Payment: React.FC = () => {
                 </div>
             </div>
 
-            <div className="px-6">
-                <div className="border-b border-gray-300 flex py-6">
+            <div className="">
+                <div className="border-b border-gray-300 flex p-6">
                     <div className="font-normal text-black mr-1">
                         Đặt phòng của bạn được bảo vệ bởi
                     </div>

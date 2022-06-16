@@ -11,15 +11,17 @@ import {
 } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import { format } from "date-fns";
-import { InfoCards } from "@components/InfoCards";
+import { InfoCards } from "@components/RoomSearching/InfoCards";
 import { useQuery } from "react-query";
 import axios from "axios";
 
-import { Map } from "@components/map";
+import { Map } from "@components/RoomSearching/Map";
+
+import Pagination from "@components/RoomSearching/Pagination";
 
 const Search: React.FC = () => {
     const router = useRouter();
-    const { location, startDate, endDate, guests } = router.query;
+    const { location, startAt, endAt, guests } = router.query;
 
     const [page, setPage] = useState(1);
 
@@ -47,8 +49,8 @@ const Search: React.FC = () => {
             <StickyHeader title="Thay đổi tìm kiếm" place={location} />
 
             <main className="font-normal ">
-                <section className="flex-grow pt-6 px-6 ">
-                    <div className="hidden lg:inline-flex mb-5 space-x-3 whitespace-nowrap]">
+                <section className="flex-grow pt-6 px-6">
+                    <div className="hidden lg:flex mb-5 space-x-3 whitespace-nowrap  justify-between">
                         <div className="border-r border-gray-300 space-x-3 pr-4 border-h-[75%] flex ">
                             <button className="px-4 py-2 border border-gray-500 hover:border-black hover:shadow-lg cursor-pointer active:scale-95 active:bg-gray 100 transition transform duration-100 ease-out rounded-full flex items-center">
                                 Giá
@@ -80,21 +82,23 @@ const Search: React.FC = () => {
                             Bếp
                         </button>
 
-                        <button className="px-4 py-2 border border-gray-500 hover:border-black hover:shadow-lg cursor-pointer active:scale-95 active:bg-gray 100 transition transform duration-100 ease-out rounded-full">
-                            Chỗ để xe miễn phí
-                        </button>
 
                         <button className="px-4 py-2 border border-gray-500 hover:border-black hover:shadow-lg cursor-pointer active:scale-95 active:bg-gray 100 transition transform duration-100 ease-out rounded-full">
                             Máy giặt
                         </button>
 
                         <button className="px-4 py-2 border border-gray-500 hover:border-black hover:shadow-lg cursor-pointer active:scale-95 active:bg-gray 100 transition transform duration-100 ease-out rounded-full">
-                            Bồn tắm nước nóng
+                            Lò sưởi
                         </button>
 
-                        <button className="px-4 py-2 border border-gray-500 hover:border-black hover:shadow-lg cursor-pointer active:scale-95 active:bg-gray 100 transition transform duration-100 ease-out rounded-full">
-                            Lò sưởi trong nhà
+                        <button className="px-4 py-2 border border-gray-500 hover:border-black hover:shadow-lg cursor-pointer active:scale-95 active:bg-gray 100 transition transform duration-100 ease-out rounded-full hidden xl:block">
+                            Máy nóng lạnh
                         </button>
+
+                        <button className="px-4 py-2 border border-gray-500 hover:border-black hover:shadow-lg cursor-pointer active:scale-95 active:bg-gray 100 transition transform duration-100 ease-out rounded-full hidden xl:block">
+                            Điều hòa
+                        </button>
+
 
                         <button className="px-4 py-2 border border-gray-500 hover:border-black hover:shadow-lg cursor-pointer active:scale-95 active:bg-gray 100 transition transform duration-100 ease-out rounded-full flex items-center space-x-3">
                             <div className="pr-2">
@@ -129,10 +133,10 @@ const Search: React.FC = () => {
                                 </span>
                             </p>
 
-                            <InfoCards
+                            <InfoCards     
+                            page={page}                       
                             
                             
-                            // key={items.key}
                             // img={items.img}
                             // location={items.location}
                             // title={items.title}
@@ -144,21 +148,37 @@ const Search: React.FC = () => {
                             {/* ),
                     )} */}
 
-                            <div className="items-center flex space-x-8 justify-center pb-4 pt-10 ">
+                            {/* Pagination */}
+                            {/* <div className="items-center flex space-x-8 justify-center pb-4 pt-10 ">
                                 <button>
                                     {" "}
+
+                                    {page > 1 ? (
+
                                     <ChevronLeftIcon
                                         fill="#dddddd"
                                         className=" w-5 h-5"
+                                       
                                         cursor={"not-allowed"}
                                         fontSize="light"
-                                    />{" "}
-                                </button>
+  
+                                        
+                                        
+                                    />
+                                    ) : (
+                                        <ChevronLeftIcon
+                                        fill="#dddddd"
+                                        className=" w-5 h-5"
+                                        onClick={() => setPage(page - 1)}
+                                        />
+                                    )} */}
+
+                                {/* </button>
                                 <button className="rounded-full bg-black text-white w-8 h-8 font-bold">1</button>
                                 <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">2</button>
                                 <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">3</button>
                                 {/* <div className="items-center font-bold text-black align-baseline">...</div> */}
-                                <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">4</button>
+                                {/* <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">4</button>
                                 <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">5</button>
                                 <button className="rounded-full font-bold text-black w-8 h-8 hover:bg-gray-300">6</button>
                                 <button>
@@ -169,9 +189,11 @@ const Search: React.FC = () => {
                                     />{" "}
                                 </button>
                                 
-                            </div>
+                            </div> */}
+
+                            
                             {/* <p className="text-sm text-center pb-8 m-0">1 - 6 trong số hơn 300 chỗ ở</p> */}
-                            <p className="text-xs text-center pb-6">Nhập ngày để xem giá đầy đủ. Áp dụng phụ phí. Có thể phát sinh thuế.</p>
+                            <p className="text-xs text-center py-6">Nhập ngày để xem giá đầy đủ. Áp dụng phụ phí. Có thể phát sinh thuế.</p>
                         </div>
                     </div>
 

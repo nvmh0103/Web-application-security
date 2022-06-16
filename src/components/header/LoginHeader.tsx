@@ -7,20 +7,29 @@ import { useState } from "react";
 import { TextField } from "@material-ui/core";
 import { Menu } from "@components/menu/Menu";
 import { MenuUser } from "@components/menu/MenuUser";
+import MenuMobile from "@components/menu/MenuMobile";
+import MenuMobileUser from "@components/menu/MenuMobileUser";
 import { getCookie } from "cookies-next";
 import Search from "@components/search";
-
+import { Modal, useModal, Text } from "@nextui-org/react";
+import { LanguageModal } from "@components/modal/language";
+import { CurrencyModal } from "@components/modal/currency";
 
 export const LoginHeader: React.FC = () => {
     const [state, setState] = useState("");
     const [stateMenu, setStateMenu] = useState(false);
     const [stateSearch, setStateSearch] = useState(false);
+    const [language, setLanguage] = useState(true);
+    const [currency, setCurrency] = useState(false);
+    const [isSelect, setIsSelect] = useState("Language");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState(event.target.value);
     };
 
     const value = getCookie("isLoggedIn");
+
+    const { setVisible, bindings } = useModal();
 
     return (
         <div className="sticky top-0 z-10">
@@ -42,7 +51,9 @@ export const LoginHeader: React.FC = () => {
                             </a>
                             <a
                                 className="hover:bg-gray-100 rounded-22 p-3 m-2"
-                                href="#"
+                                onClick={() => {
+                                    setVisible(true);
+                                }}
                             >
                                 <GlobeIcon />
                             </a>
@@ -59,32 +70,95 @@ export const LoginHeader: React.FC = () => {
                                 >
                                     <MenuIcon className="h-6" />
 
-                                    { !value &&
-                                    <UserIcon className="h-6" />
-                                    }
+                                    {!value && <UserIcon className="h-6" />}
 
-                                    {value &&
-                                    <img
-                                    src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3"
-                                    className="rounded-full w-[28px] h-[28px] block mx-auto"
-                                ></img>
-}
-
+                                    {value && (
+                                        <img
+                                            src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3"
+                                            className="rounded-full w-[28px] h-[28px] block mx-auto"
+                                        ></img>
+                                    )}
                                 </Button>
+                                <div className=" hidden md:block">
+                                    {!value && stateMenu && <Menu />}
 
-                                {!value && (
-                                stateMenu && <Menu />
-                                )}
-
-                                {value && (
-                                stateMenu && <MenuUser />
-                                )}
-
+                                    {value && stateMenu && <MenuUser />}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div className=" md:hidden">
+                {!value && stateMenu && <MenuMobile />}
+
+                {value && stateMenu && <MenuMobileUser />}
+            </div>
+
+            <Modal
+                scroll
+                closeButton
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+                width="800px"
+                className=""
+                {...bindings}
+            >
+                <Modal.Header className="block">
+                    <div className="flex text-left items-start border-b border-gray-300">
+                        {isSelect === "Language" ? (
+                            <h2
+                                className="text-black text-base px-4 py-4 hover:bg-gray-300 border-b border-black"
+                                onClick={() => {
+                                    setLanguage(true);
+                                    setCurrency(false);
+                                    setIsSelect("Language");
+                                }}
+                            >
+                                Ngôn ngữ và khu vực
+                            </h2>
+                        ) : (
+                            <h2
+                                className=" text-base px-4 py-4 hover:bg-gray-300"
+                                onClick={() => {
+                                    setLanguage(true);
+                                    setCurrency(false);
+                                    setIsSelect("Language");
+                                }}
+                            >
+                                Ngôn ngữ và khu vực
+                            </h2>
+                        )}
+
+                        {isSelect === "Currency" ? (
+                            <h2
+                                className="text-black text-base px-4 py-4 hover:bg-gray-300 border-b border-black"
+                                onClick={() => {
+                                    setLanguage(false);
+                                    setCurrency(true);
+                                    setIsSelect("Currency");
+                                }}
+                            >
+                                Tiền tệ
+                            </h2>
+                        ) : (
+                            <h2
+                                className=" text-base px-4 py-4 hover:bg-gray-300"
+                                onClick={() => {
+                                    setLanguage(false);
+                                    setCurrency(true);
+                                    setIsSelect("Currency");
+                                }}
+                            >
+                                Tiền tệ
+                            </h2>
+                        )}
+                    </div>
+                </Modal.Header>
+                <Modal.Body>
+                    {language ? <LanguageModal /> : <CurrencyModal />}
+                </Modal.Body>
+            </Modal>
         </div>
     );
 };

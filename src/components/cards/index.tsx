@@ -2,7 +2,10 @@ import React from "react";
 
 import data from "@public/location.json";
 
+import { useRouter } from "next/router";
+
 export const Cards: React.FC = () => {
+    const Router = useRouter();
     return (
         <div className="flex-1 my-4 ">
             <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 w-full ">
@@ -10,6 +13,15 @@ export const Cards: React.FC = () => {
                     <div
                         key={item.img}
                         className="col-span-1 rounded-xl border text-white cursor-pointer "
+                        onClick={() => {
+                            Router.push({
+                                pathname: "/search",
+                                query: {
+                                    location: item.location,
+                                    page: 1,
+                                },
+                            });
+                        }}
                     >
                         <img
                             className="rounded-t-xl object-fit w-full"

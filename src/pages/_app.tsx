@@ -41,6 +41,7 @@ import { getDirection } from "@utils/get-direction";
 
 // 1. import `NextUIProvider` component
 import { NextUIProvider } from '@nextui-org/react';
+import { MantineProvider } from '@mantine/core';
 
 const Noop: React.FC = ({ children }) => <>{children}</>;
 

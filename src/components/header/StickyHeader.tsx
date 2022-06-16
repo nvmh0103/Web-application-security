@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { SearchIcon } from "@heroicons/react/solid";
 import { Logo } from "@components";
 import { Button } from "@components/button";
@@ -11,6 +11,10 @@ import { MenuUser } from "@components/menu/MenuUser";
 import { getCookie } from "cookies-next";
 import MenuMobile from "@components/menu/MenuMobile";
 import MenuMobileUser from "@components/menu/MenuMobileUser";
+import { Modal, useModal, Text } from "@nextui-org/react";
+import { LanguageModal } from "@components/modal/language";
+import { CurrencyModal } from "@components/modal/currency";
+import { useOnClickOutside } from "usehooks-ts";
 
 interface Props {
     title?: string;
@@ -24,12 +28,31 @@ export const StickyHeader: React.FC<Props> = ({
     const [state, setState] = useState("");
     const [stateMenu, setStateMenu] = useState(false);
     const [stateSearch, setStateSearch] = useState(false);
+    const [language, setLanguage] = useState(true);
+    const [currency, setCurrency] = useState(false);
+    const [isSelect, setIsSelect] = useState("Language");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState(event.target.value);
     };
 
     const value = getCookie("isLoggedIn");
+
+    const { setVisible, bindings } = useModal();
+
+    const ref = useRef(null);
+
+    const handleClickOutside = () => {
+        setStateSearch(false);
+        console.log("clicked outside");
+    };
+
+    const handleClickInside = () => {
+        // Your custom logic here
+        console.log("clicked inside");
+    };
+
+    useOnClickOutside(ref, handleClickOutside);
 
     return (
         <div className="sticky top-0 z-10">
@@ -67,7 +90,9 @@ export const StickyHeader: React.FC<Props> = ({
                         </a>
                         <a
                             className="hover:bg-gray-100 rounded-22 p-3 m-2"
-                            href="#"
+                            onClick={() => {
+                                setVisible(true);
+                            }}
                         >
                             <GlobeIcon />
                         </a>
@@ -109,7 +134,77 @@ export const StickyHeader: React.FC<Props> = ({
                 {value && stateMenu && <MenuMobileUser />}
             </div>
 
-            {stateSearch && <Search place={place} />}
+            {stateSearch && (
+                <div ref={ref}>
+                    {" "}
+                    <Search place={place} />{" "}
+                </div>
+            )}
+
+            <Modal
+                scroll
+                closeButton
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+                width="1000px"
+                className=""
+                {...bindings}
+            >
+                <Modal.Header className="block">
+                    <div className="flex text-left items-start border-b border-gray-300">
+                        {isSelect === "Language" ? (
+                            <h2
+                                className="text-black text-base px-4 py-4 hover:bg-gray-300 border-b border-black"
+                                onClick={() => {
+                                    setLanguage(true);
+                                    setCurrency(false);
+                                    setIsSelect("Language");
+                                }}
+                            >
+                                Ngôn ngữ và khu vực
+                            </h2>
+                        ) : (
+                            <h2
+                                className=" text-base px-4 py-4 hover:bg-gray-300"
+                                onClick={() => {
+                                    setLanguage(true);
+                                    setCurrency(false);
+                                    setIsSelect("Language");
+                                }}
+                            >
+                                Ngôn ngữ và khu vực
+                            </h2>
+                        )}
+
+                        {isSelect === "Currency" ? (
+                            <h2
+                                className="text-black text-base px-4 py-4 hover:bg-gray-300 border-b border-black"
+                                onClick={() => {
+                                    setLanguage(false);
+                                    setCurrency(true);
+                                    setIsSelect("Currency");
+                                }}
+                            >
+                                Tiền tệ
+                            </h2>
+                        ) : (
+                            <h2
+                                className=" text-base px-4 py-4 hover:bg-gray-300"
+                                onClick={() => {
+                                    setLanguage(false);
+                                    setCurrency(true);
+                                    setIsSelect("Currency");
+                                }}
+                            >
+                                Tiền tệ
+                            </h2>
+                        )}
+                    </div>
+                </Modal.Header>
+                <Modal.Body>
+                    {language ? <LanguageModal /> : <CurrencyModal />}
+                </Modal.Body>
+            </Modal>
         </div>
     );
 };

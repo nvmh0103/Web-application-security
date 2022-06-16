@@ -10,6 +10,11 @@ import Search from "@components/search";
 import Menu from "@components/menu/Menu";
 import { MenuUser } from "@components/menu/MenuUser";
 import { getCookie } from "cookies-next";
+import MenuMobile from "@components/menu/MenuMobile";
+import MenuMobileUser from "@components/menu/MenuMobileUser";
+import { Modal, useModal, Text } from "@nextui-org/react";
+import { LanguageModal } from "@components/modal/language";
+import { CurrencyModal } from "@components/modal/currency";
 
 interface Props {
     className?: string;
@@ -25,6 +30,9 @@ export const HomeHeader: React.FC<Props> = ({
     const [state, setState] = useState("");
     const [stateMenu, setStateMenu] = useState(false);
     const [stateSearch, setStateSearch] = useState(false);
+    const [language, setLanguage] = useState(true);
+    const [currency, setCurrency] = useState(false);
+    const [isSelect, setIsSelect] = useState("Language");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState(event.target.value);
@@ -32,16 +40,18 @@ export const HomeHeader: React.FC<Props> = ({
 
     const value = getCookie("isLoggedIn");
 
+    const { setVisible, bindings } = useModal();
+
     return (
         <div className={className}>
-            <div className="text-center bg-black grid md:grid-cols-3 grid-cols-2 lg:px-20 px-10 py-3 items-center justify-between ">
+            <div className="text-center bg-black grid lg:grid-cols-3 grid-cols-2 lg:px-20 px-10 py-3 items-center justify-between">
                 <div className="flex items-center h-10 cursor-pointer my-auto ">
                     <a className="" href="/">
                         <AirbnbIcon color="white" />
                     </a>
                 </div>
 
-                <div className=" items-center text-white hidden md:flex cursor-pointer justify-between space-x-8">
+                <div className=" items-center text-white hidden lg:flex cursor-pointer justify-between space-x-8">
                     <a className="inline-block relative justify-center items-center hover:border-b border-white transition duration-200 ease-out">
                         Nơi ở
                     </a>
@@ -65,9 +75,12 @@ export const HomeHeader: React.FC<Props> = ({
                         </a>
                         <a
                             className="hover:bg-gray-600 rounded-22 p-3 m-2"
-                            href="#"
+                            onClick={() => {
+                                setVisible(true);
+                            }}
                         >
                             <GlobeIcon color="white" />
+                            
                         </a>
 
                         <div className="block text-left">
@@ -91,17 +104,96 @@ export const HomeHeader: React.FC<Props> = ({
                                 )}
                             </Button>
 
-                            {!value && stateMenu && <Menu />}
+                            <div className="hidden md:block">
+                                {!value && stateMenu && <Menu />}
 
-                            {value && stateMenu && <MenuUser />}
+                                {value && stateMenu && <MenuUser />}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="pb-8 bg-black">
-                <Search className="pb-8 bg-black" />
+            <div className=" md:hidden">
+                {!value && stateMenu && <MenuMobile />}
+
+                {value && stateMenu && <MenuMobileUser />}
             </div>
+
+            <div className="pb-8 bg-black">
+                <Search className="pb-8 bg-black " place={place} />
+            </div>
+
+            <Modal
+                                scroll
+                                closeButton
+                                aria-labelledby="modal-title"
+                                aria-describedby="modal-description"
+                                width="1000px"
+                                className=""
+                                {...bindings}
+                            >
+                                <Modal.Header className="block">
+                                    
+
+                                    <div className="flex text-left items-start border-b border-gray-300">
+                                        {isSelect === "Language" ? (
+                                            <h2
+                                                className="text-black text-base px-4 py-4 hover:bg-gray-300 border-b border-black"
+                                                onClick={() => {
+                                                    setLanguage(true);
+                                                    setCurrency(false);
+                                                    setIsSelect("Language");
+                                                }}
+                                            >
+                                                Ngôn ngữ và khu vực
+                                            </h2>
+                                        ) : (
+                                            <h2
+                                                className=" text-base px-4 py-4 hover:bg-gray-300"
+                                                onClick={() => {
+                                                    setLanguage(true);
+                                                    setCurrency(false);
+                                                    setIsSelect("Language");
+                                                }}
+                                            >
+                                                Ngôn ngữ và khu vực
+                                            </h2>
+                                        )}
+
+                                        {isSelect === "Currency" ? (
+                                            <h2
+                                                className="text-black text-base px-4 py-4 hover:bg-gray-300 border-b border-black"
+                                                onClick={() => {
+                                                    setLanguage(false);
+                                                    setCurrency(true);
+                                                    setIsSelect("Currency");
+                                                }}
+                                            >
+                                                Tiền tệ
+                                            </h2>
+                                        ) : (
+                                            <h2
+                                                className=" text-base px-4 py-4 hover:bg-gray-300"
+                                                onClick={() => {
+                                                    setLanguage(false);
+                                                    setCurrency(true);
+                                                    setIsSelect("Currency");
+                                                }}
+                                            >
+                                                Tiền tệ
+                                            </h2>
+                                        )}
+                                    </div>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    {language ? (
+                                        <LanguageModal />
+                                    ) : (
+                                        <CurrencyModal />
+                                    )}
+                                </Modal.Body>
+                            </Modal>
         </div>
     );
 };

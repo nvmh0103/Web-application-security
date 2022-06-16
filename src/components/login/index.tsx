@@ -21,8 +21,13 @@ import { toast } from "react-toastify";
 import { API_ENDPOINTS } from "@utils/apiEndpoints";
 import { Loading } from "@nextui-org/react";
 import { redirect } from "next/dist/server/api-utils";
-import { DeviceMobileIcon, PhoneIcon } from "@heroicons/react/outline";
+import {
+    DeviceMobileIcon,
+    ExclamationCircleIcon,
+    PhoneIcon,
+} from "@heroicons/react/outline";
 import { setCookies } from "cookies-next";
+import http from "@utils/http";
 
 type User = {
     password: string;
@@ -43,9 +48,9 @@ export const Login: React.FC = () => {
 
     const onSubmit = handleSubmit(async (user) => {
         setIsLoading(true);
-        const response = await axios
+        const response = await http
             .post(
-                `https://cc62e73f33af4d5eb355d601efc35466-3afda50d-vm-80.vlab2.uit.edu.vn/api/v1${API_ENDPOINTS.LOGIN}`,
+                `https://airbnb.cybersoft.edu.vn${API_ENDPOINTS.LOGIN}`,
                 user,
             )
             .then((res) => {
@@ -61,7 +66,6 @@ export const Login: React.FC = () => {
                 setCookies("isLoggedIn", true);
                 router.push("/");
                 setIsLoading(false);
-                
             })
             .catch((err) => {
                 if (err.response.status === 400) {
@@ -166,77 +170,106 @@ export const Login: React.FC = () => {
                                             </div>
                                         )}
                                     </div> */}
-
-                                    <div className="rounded-lg">
-                                        <input
-                                            {...register("email", {
-                                                required:
-                                                    "Email không được để trống",
-
-                                                pattern: {
-                                                    value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                                    message:
-                                                        "Email không đúng định dạng",
-                                                },
-                                            })}
-                                            id="email"
-                                            name="email"
-                                            type="text"
-                                            placeholder="Email"
-                                            className=" text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black "
-                                        ></input>
-                                        {errors.email && (
-                                            <div className="text-red-500 font-medium text-xs my-2">
-                                                {errors.email.message}
+                                    <label className="pb-4">
+                                        <div className="">
+                                            <div>
+                                                <p className="text-base">
+                                                    Email
+                                                </p>
                                             </div>
-                                        )}
-                                    </div>
+                                            <div className="rounded-lg">
+                                                <input
+                                                    {...register("email", {
+                                                        required:
+                                                            "Email không được để trống",
 
-                                    <div className="rounded-lg">
-                                        <input
-                                            {...register("password", {
-                                                required: true,
-                                            })}
-                                            type="password"
-                                            id="password"
-                                            name="password"
-                                            placeholder="Mật khẩu"
-                                            className="text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black"
-                                        ></input>
-                                        {errors.password && (
-                                            <div className="text-red-500 font-medium text-xs my-2">
-                                                Bạn chưa nhập mật khẩu
+                                                        pattern: {
+                                                            value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                                            message:
+                                                                "Email không đúng định dạng",
+                                                        },
+                                                    })}
+                                                    id="email"
+                                                    name="email"
+                                                    type="text"
+                                                    placeholder=""
+                                                    className=" text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black "
+                                                ></input>
                                             </div>
-                                        )}
-                                    </div>
+                                            {errors.email && (
+                                                <div className="text-red-800 font-medium text-xs my-4 p-2 border border-red-500 bg-red-300 w-max rounded-lg flex">
+                                                    <ExclamationCircleIcon className="w-4 h-4 mr-1 self-center" />
+                                                    {errors.email.message}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </label>
+
+                                    <label className="pb-4">
+                                        <div className="">
+                                            <div>
+                                                <p className="text-base">
+                                                    Mật khẩu
+                                                </p>
+                                            </div>
+                                            <div className="rounded-lg">
+                                                <input
+                                                    {...register("password", {
+                                                        required: true,
+                                                    })}
+                                                    type="password"
+                                                    id="password"
+                                                    name="password"
+                                                    placeholder=""
+                                                    className="text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black"
+                                                ></input>
+                                            </div>
+                                            {errors.password && (
+                                                <div className="text-red-800 font-medium text-xs my-4 p-2 border border-red-500 bg-red-300 w-max rounded-lg flex">
+                                                    <ExclamationCircleIcon className="w-4 h-4 mr-1 self-center" />
+                                                    Bạn chưa nhập mật khẩu
+                                                </div>
+                                            )}
+                                        </div>
+                                    </label>
                                 </div>
                             )}
 
                             {!isLogin && (
-                                <div className="rounded-lg">
-                                    <input
-                                        {...register("phoneNumber", {
-                                            required:
-                                                "Bạn chưa nhập số điện thoại",
-
-                                            pattern: {
-                                                value: /^[0-9]{10}$/,
-                                                message:
-                                                    "Số điện thoại chỉ chứa số và có 10 ký tự",
-                                            },
-                                        })}
-                                        type="text"
-                                        id="phoneNumber"
-                                        name="phoneNumber"
-                                        placeholder="Số điện thoại"
-                                        className="text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black"
-                                    ></input>
-                                    {errors.phoneNumber && (
-                                        <div className="text-red-500 font-medium text-xs my-2">
-                                            {errors.phoneNumber.message}
+                                <label className="pb-4">
+                                    <div className="">
+                                        <div>
+                                            <p className="text-base">
+                                                Số điện thoại
+                                            </p>
                                         </div>
-                                    )}
-                                </div>
+                                        <div className="rounded-lg">
+                                            <input
+                                                {...register("phoneNumber", {
+                                                    required:
+                                                        "Bạn chưa nhập số điện thoại",
+
+                                                    pattern: {
+                                                        value: /^[0-9]{10}$/,
+                                                        message:
+                                                            "Số điện thoại chỉ chứa số và có 10 ký tự",
+                                                    },
+                                                })}
+                                                type="text"
+                                                id="phoneNumber"
+                                                name="phoneNumber"
+                                                placeholder=""
+                                                className="text-base w-full  border border-gray-500 md:text-left text-center p-4 active:outline-black"
+                                            ></input>
+                                        </div>
+                                        {errors.phoneNumber && (
+                                            <div className="text-red-800 font-medium text-xs my-4 p-2 border border-red-500 bg-red-300 w-max rounded-lg flex">
+                                                <ExclamationCircleIcon className="w-4 h-4 mr-1 self-center" />
+                                                {errors.phoneNumber.message}
+                                            </div>
+                                        )}
+                                    </div>
+                                </label>
                             )}
 
                             <div>

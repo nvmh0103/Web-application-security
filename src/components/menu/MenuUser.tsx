@@ -14,7 +14,7 @@ export const MenuUser: React.FC = () => {
     };
 
     const handleClickInside = () => {
-        setIsOpen(true);
+        
         console.log("clicked inside");
     };
 
@@ -28,6 +28,10 @@ export const MenuUser: React.FC = () => {
                     ref={ref}
                 >
                     <ul className="space-y-3 font-normal">
+                        <li className="font-bold hover:bg-gray-300 py-1 px-5">
+                            <a href="/admin">Admin</a>
+                        </li>
+
                         <li className="font-bold text-black hover:bg-gray-300 py-1 px-5">
                             <a href="">Tin nhắn</a>
                         </li>
@@ -43,11 +47,15 @@ export const MenuUser: React.FC = () => {
                         <hr className="text-gray-500"></hr>
 
                         <li className="hover:bg-gray-300 py-1 px-5">
-                            <a href="https://www.airbnb.com.vn/host/homes">Cho thuê nhà</a>
+                            <a href="https://www.airbnb.com.vn/host/homes">
+                                Cho thuê nhà
+                            </a>
                         </li>
 
                         <li className="hover:bg-gray-300 py-1 px-5">
-                            <a href="https://www.airbnb.com.vn/host/experiences?from_nav=1">Tổ chức trải nghiệm</a>
+                            <a href="https://www.airbnb.com.vn/host/experiences?from_nav=1">
+                                Tổ chức trải nghiệm
+                            </a>
                         </li>
 
                         <li className="hover:bg-gray-300 py-1 px-5">

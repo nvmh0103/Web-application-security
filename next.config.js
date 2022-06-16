@@ -30,7 +30,7 @@ const localeSubpaths = {
 // });
 
 const config = {
-    // reactStrictMode: false,
+    reactStrictMode: false,
     webpack5: true,
     webpack: (config) => {
         config.resolve.fallback = { fs: false };
@@ -96,6 +96,7 @@ const config = {
             "events.mapbox.com",
             "media.discordapp.net",
             "nvmh0103-bucket.s3.us-east-1.amazonaws.com",
+            "airbnb.cybersoft.edu.vn",
         ],
     },
 

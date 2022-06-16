@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
     MinusSmIcon,
     PlusSmIcon,
@@ -22,10 +22,49 @@ import { addDays, format } from "date-fns";
 
 import { useOnClickOutside } from "usehooks-ts";
 
+import Autocomplete from "@mui/material/Autocomplete";
+import axios from "axios";
+import { API_ENDPOINTS } from "@utils/apiEndpoints";
+import { useQuery } from "react-query";
+import { Loading } from "@nextui-org/react";
+
+import LocationSearch from "@components/search/LocationSearch";
+
 interface Props {
     place?: string;
     className?: string;
 }
+
+export interface Location {
+    name: string;
+    province: string;
+    country: string;
+}
+export interface RootObject {
+    deleteAt: boolean;
+    _id: string;
+    location: Location[];
+    valueate?: number;
+    __v: number;
+    image: string;
+}
+
+// const getLocations = async () =>
+//     await (
+//         await fetch(
+//             `airbnb.cybersoft.edu.vn${API_ENDPOINTS.SEARCH}`,
+//         )
+//     ).json();
+
+export const getStaticProps = async () => {
+    const res = await axios.get(`airbnb.cybersoft.edu.vn${API_ENDPOINTS.SEARCH}`);
+    return {
+        props: {
+            locations: res.data,
+        },
+    };
+};
+
 
 export const Search: React.FC<Props> = ({
     place = "Bạn sắp đi đâu?",
@@ -38,7 +77,20 @@ export const Search: React.FC<Props> = ({
         setSearchInput(event.target.value);
     };
 
+    // const { data, isLoading, isFetching } = useQuery<RootObject>(
+    //     "info",
+    //     getLocations,
+    // );
+    // console.log(data);
+
+    // if (!data) {
+    //     return <div>Dữ liệu không tìm thấy :)</div>;
+    // }
+
+    // if (isLoading) return <Loading type="points" />;
+
     const [openDay, setOpenDay] = useState(false);
+    const [openLocation, setOpenLocation] = useState(false);
 
     const [openGuests, setOpenGuests] = useState(false);
     const [adults, setAdults] = useState(1);
@@ -64,7 +116,9 @@ export const Search: React.FC<Props> = ({
     const ref = useRef(null);
 
     const handleClickOutside = () => {
-        // Your custom logic here
+        setOpenLocation(false);
+        setOpenGuests(false);
+        setOpenDay(false);
         console.log("clicked outside");
     };
 
@@ -77,6 +131,7 @@ export const Search: React.FC<Props> = ({
 
     const resetInput = () => {
         setOpenDay(false);
+       
     };
 
     const formattedStartDate = format(
@@ -87,27 +142,41 @@ export const Search: React.FC<Props> = ({
 
     return (
         <div className={className}>
-            <div className="flex border border-gray-500 mx-[20%] rounded-40 justify-between items-center bg-white">
+            <div className="flex border border-gray-500 mx-[20%] rounded-40 justify-between items-center bg-white relative">
                 <div className=" rounded-full flex-1 py-1 ">
                     <p className="px-5 lg:text-left text-center">
                         <p>Địa điểm</p>
 
                         <input
                             type="text"
+                            
                             onChange={(e) => handleChange(e)}
                             value={searchInput || ""}
                             placeholder={place}
                             className=" text-base w-full outline-0 lg:text-left text-center"
+                            onClick={() => setOpenLocation(!openLocation)}
                         />
                     </p>
+
+                    {openLocation && (
+                        <div
+                            className="absolute bg-white lg:w-1/2 w-full h-[100px] top-[70px] z-10 border border-gray-300 shadow-listProduct rounded-xl"
+                            ref={ref}
+                        >
+
+                        <LocationSearch inputString={searchInput} />
+
+                        </div>
+                    )}
                     {/* <div className="border-r h-[30px]"></div> */}
                 </div>
 
-                <div className="hidden lg:inline-block border-l border-gray-500  flex-1">
+                <div className="hidden lg:inline-block border-l border-gray-500  flex-1" ref={ref}>
                     <div
                         className="hover:bg-gray-500 cursor-pointer rounded-40 px-5 py-1 "
                         onClick={() => {
-                            openDay ? setOpenDay(false) : setOpenDay(true);
+                            setOpenDay(!openDay);
+                            console.log(openDay);
                         }}
                     >
                         <p className="m-0">Nhận phòng</p>
@@ -115,11 +184,12 @@ export const Search: React.FC<Props> = ({
                     </div>
                 </div>
 
-                <div className="hidden lg:inline-block border-l border-gray-500  flex-1">
+                <div className="hidden lg:inline-block border-l border-gray-500  flex-1" ref={ref}>
                     <div
                         className="hover:bg-gray-500 cursor-pointer rounded-40 px-5 py-1 "
                         onClick={() => {
-                            openDay ? setOpenDay(false) : setOpenDay(true);
+                            setOpenDay(!openDay);
+                            console.log(openDay);
                         }}
                     >
                         <p className="m-0">Trả phòng</p>
@@ -132,9 +202,8 @@ export const Search: React.FC<Props> = ({
                         <div
                             className=" cursor-pointer  lg:px-5 lg:py-1 flex pl-4 "
                             onClick={() => {
-                                openGuests
-                                    ? setOpenGuests(false)
-                                    : setOpenGuests(true);
+                                
+                                    setOpenGuests(!openGuests);
                             }}
                         >
                             <div className="hidden lg:inline-block">
@@ -150,10 +219,9 @@ export const Search: React.FC<Props> = ({
                                         pathname: "/search",
                                         query: {
                                             location: searchInput,
-                                            startDate:
+                                            startAt:
                                                 pickDay[0].startDate.toISOString(),
-                                            endDate:
-                                                pickDay[0].endDate.toISOString(),
+                                            endAt: pickDay[0].endDate.toISOString(),
                                             guests: guests,
                                             page: 1,
                                         },
@@ -168,16 +236,16 @@ export const Search: React.FC<Props> = ({
             </div>
 
             {openDay && (
-                <div className=" flex flex-col col-span-3 mx-auto items-center">
+                <div className=" flex flex-col col-span-3 items-center absolute z-10 mx-[30%]" ref={ref}>
                     <DateRangePicker
                         onChange={(item: { selection: any }) =>
                             setPickDay([item.selection])
                         }
                         showSelectionPreview={true}
                         moveRangeOnFirstSelection={false}
-                        months={1}
+                        months={2}
                         ranges={pickDay}
-                        direction="vertical"
+                        direction="horizontal"
                         rangeColors={["#ff385c"]}
                         startDate={new Date()}
                         endDate={pickDay[0].endDate}
@@ -196,7 +264,7 @@ export const Search: React.FC<Props> = ({
                         />
                     </div> */}
 
-                    <div className="flex space-x-20">
+                    {/* <div className="flex space-x-20">
                         <button
                             className="flex-grow hover:bg-gray-500 hover:text-black py-3 px-5 font-semibold rounded-full"
                             onClick={resetInput}
@@ -210,13 +278,11 @@ export const Search: React.FC<Props> = ({
                                         pathname: "/search",
                                         query: {
                                             location: searchInput,
-                                            startDate:
+                                            startAt:
                                                 pickDay[0].startDate.toISOString(),
-                                            endDate:
-                                                pickDay[0].endDate.toISOString(),
+                                            endAt: pickDay[0].endDate.toISOString(),
                                             guests: guests,
                                             page: 1,
-                                            
                                         },
                                     });
                                 }}
@@ -224,14 +290,14 @@ export const Search: React.FC<Props> = ({
                                 Tìm kiếm
                             </a>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             )}
 
             {openGuests && (
-                <div className="flex flex-col space-y-6 p-4 border-t border-gray-300 shadow-product rounded-xl ml-[60%] mr-[20%] bg-white">
+                <div className="flex flex-col absolute z-10 space-y-6 p-4 border-t border-gray-300 shadow-product rounded-xl ml-[60%] mr-[10%] bg-white" ref={ref}>
                     <div className="flex justify-between ">
-                        <div className="">
+                        <div className="mr-6">
                             <h2 className="text-black"> Người lớn </h2>
                             <p className="">Từ 13 tuổi trở lên</p>
                         </div>
@@ -260,7 +326,7 @@ export const Search: React.FC<Props> = ({
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="">
+                        <div className="mr-6">
                             <h2 className="text-black"> Trẻ em </h2>
                             <p className="">Từ 13 tuổi trở xuống</p>
                         </div>

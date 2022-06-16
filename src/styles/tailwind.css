@@ -1778,6 +1778,10 @@ video {
     justify-content: space-between;
 }
 
+.rdrDefinedRangesWrapper {
+    display: none;
+}
+
 input[type=radio]:checked ~ .check {
     border: 5px solid #000000;
   }
@@ -1790,9 +1794,25 @@ input[type=radio]:checked ~ .check {
     color: #ffffff;
   }
 
-a.anchor {
-    display: block;
-    position: relative;
-    top: -250px;
-    visibility: hidden;
-}
+  .text__description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+ }
+
+.logo {
+    height: 32px;
+    margin: 16px;
+    background: "";
+  }
+  
+  .site-layout-sub-header-background {
+    background: #fff;
+  }
+  
+  .site-layout-background {
+    background: #fff;
+  }

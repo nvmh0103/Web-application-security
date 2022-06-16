@@ -39,7 +39,7 @@ const Room: React.FC = () => {
 
             
 
-           <div> <StickyHeader title="Bắt đầu tìm kiếm" place="Bạn muốn đi đâu" /> </div> 
+           
 
             
 
@@ -47,7 +47,7 @@ const Room: React.FC = () => {
             
            
                
-            <Footer />
+           
         </Container>
     );
 };

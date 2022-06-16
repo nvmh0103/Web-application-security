@@ -29,6 +29,7 @@ import {
 import { Router, useRouter } from "next/router";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { API_ENDPOINTS } from "@utils/apiEndpoints";
 // import { API_ENDPOINTS } from "@utils/apiEndpoints";
 
 type PaymentOptionProps = {
